@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.example</groupId>
-	<artifactId>TASK3</artifactId>
+	<artifactId>TASK</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
-	<name>TASK3</name>
+	<name>TASK</name>
 	<description>Demo project for Spring Boot</description>
 	<url/>
 	<licenses>
@@ -38,6 +38,12 @@
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<scope>runtime</scope>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-tomcat</artifactId>
 			<scope>provided</scope>
 		</dependency>
@@ -48,23 +54,23 @@
 		</dependency>
 		
 		 <!--https://mvnrepository.com/artifact/jakarta.servlet.jsp.jstl/jakarta.servlet.jsp.jstl-api -->
- <dependency>
- <groupId>jakarta.servlet.jsp.jstl</groupId>
- <artifactId>jakarta.servlet.jsp.jstl-api</artifactId>
- <version>3.0.0</version>
- </dependency>
- <!--https://mvnrepository.com/artifact/org.glassfish.web/jakarta.servlet.jsp.jstl -->
- <dependency>
- <groupId>org.glassfish.web</groupId>
- <artifactId>jakarta.servlet.jsp.jstl</artifactId>
- <version>3.0.0</version>
- </dependency>
- <!--https://mvnrepository.com/artifact/org.apache.tomcat.embed/tomcat-embed-jasper -->
- <dependency>
- <groupId>org.apache.tomcat.embed</groupId>
- <artifactId>tomcat-embed-jasper</artifactId>
- <scope>provided</scope>
- </dependency>
+ 		<dependency>
+	 		<groupId>jakarta.servlet.jsp.jstl</groupId>
+	 		<artifactId>jakarta.servlet.jsp.jstl-api</artifactId>
+			 <version>3.0.0</version>
+			 </dependency>
+			 <!--https://mvnrepository.com/artifact/org.glassfish.web/jakarta.servlet.jsp.jstl -->
+			 <dependency>
+			 <groupId>org.glassfish.web</groupId>
+			 <artifactId>jakarta.servlet.jsp.jstl</artifactId>
+			 <version>3.0.0</version>
+			 </dependency>
+			 <!--https://mvnrepository.com/artifact/org.apache.tomcat.embed/tomcat-embed-jasper -->
+			 <dependency>
+			 <groupId>org.apache.tomcat.embed</groupId>
+			 <artifactId>tomcat-embed-jasper</artifactId>
+			 <scope>provided</scope>
+		 </dependency>
 
 	</dependencies>
 
