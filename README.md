@@ -80,7 +80,7 @@ ALTER TABLE private_todo
 ADD CONSTRAINT fk_private_todo_user FOREIGN KEY (user_id) REFERENCES user(user_id);
 ```
 
-## Step3: 입력 예시
+## Step 3: 입력 예시
 ```sql
 -- 사용자 데이터 삽입
 INSERT INTO user (password, name) VALUES ('password123', '홍길동');
@@ -101,4 +101,24 @@ VALUES ('팀 회의', '10:00:00', '11:00:00', '월요일', 'red', 1, 1);
 -- 개인 일정 삽입
 INSERT INTO private_todo (todo_name, st_time, ed_time, day, color, user_id) 
 VALUES ('개인 공부', '20:00:00', '22:00:00', '화요일', 'blue', 2);
+```
+## Step 4: 조회 예시
+```sql
+--특정 팀의 모든 사용자 조회
+SELECT u.name, tu.role, tu.leader 
+FROM team_users tu
+JOIN user u ON tu.user_id = u.user_id
+WHERE tu.team_id = 1;
+```
+```sql
+--특정 사용자의 개인 일정 조회
+SELECT todo_name, st_time, ed_time, day, color
+FROM private_todo
+WHERE user_id = 2;
+```
+```sql
+-- 특정 팀의 팀 일정 조회
+SELECT tt.todo_name, tt.st_time, tt.ed_time, tt.day, tt.color
+FROM team_todo tt
+WHERE tt.team_id = 1;
 ```
