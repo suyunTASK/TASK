@@ -55,6 +55,12 @@ CREATE TABLE private_todo (
     color VARCHAR(20),
     user_id INT NOT NULL
 );
+
+```
+### step 1-A
+한글 깨질시 테이블 인코딩 수정 코드
+```sql
+ALTER TABLE 테이블명 CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 ```
 
 ## Step 2: 외래키 추가
