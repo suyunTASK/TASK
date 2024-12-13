@@ -252,9 +252,9 @@
                 <div class="nav-link">캘린더</div>
                 <div class="nav-link">업무 별 블록</div>
             </div>
-            <button class="add-task-btn">+ 새 업무</button>
-        </div>
-
+            <button class="add-task-btn" onClick="location.href='addTask.jsp'">+ 새 업무</button>
+        </div>	
+		
         <!-- 칸반 보드 -->
         <div class="board-container">
             <div class="board">
@@ -263,7 +263,7 @@
                         할 일
                         <span class="task-count">3</span>
                     </div>
-                    <div class="task-card">
+                    <div class="task-card" draggable="true">
                         <div class="task-title">로그인 페이지 디자인</div>
                         <div class="task-meta">
                             <div class="task-assignee">
@@ -273,7 +273,7 @@
                             <span class="priority-badge priority-high">높음</span>
                         </div>
                     </div>
-                    <div class="task-card">
+                    <div class="task-card" draggable="true">
                         <div class="task-title">데이터베이스 설계</div>
                         <div class="task-meta">
                             <div class="task-assignee">
@@ -290,7 +290,7 @@
                         진행중
                         <span class="task-count">2</span>
                     </div>
-                    <div class="task-card">
+                    <div class="task-card" draggable="true">
                         <div class="task-title">API 개발</div>
                         <div class="task-meta">
                             <div class="task-assignee">
@@ -307,7 +307,7 @@
                         검토중
                         <span class="task-count">1</span>
                     </div>
-                    <div class="task-card">
+                    <div class="task-card" draggable="true">
                         <div class="task-title">메인 페이지 UI 검토</div>
                         <div class="task-meta">
                             <div class="task-assignee">
@@ -324,7 +324,7 @@
                         완료
                         <span class="task-count">2</span>
                     </div>
-                    <div class="task-card">
+                    <div class="task-card" draggable="true">
                         <div class="task-title">요구사항 분석</div>
                         <div class="task-meta">
                             <div class="task-assignee">
@@ -338,5 +338,54 @@
             </div>
         </div>
     </div>
+    <script>
+	    const taskCards = document.querySelectorAll('.task-card');
+	    const columns = document.querySelectorAll('.column');
+	
+	    taskCards.forEach(card => {
+	        card.addEventListener('dragstart', () => {
+	            card.classList.add('dragging');
+	        });
+	        card.addEventListener('dragend', () => {
+	            card.classList.remove('dragging');
+	        });
+	    });
+	
+	    columns.forEach(column => {
+	        column.addEventListener('dragover', (e) => {
+	            e.preventDefault();
+	            const draggingCard = document.querySelector('.dragging');
+	            const afterElement = getDragAfterElement(column, e.clientY);
+	            if (afterElement == null) {
+	                column.appendChild(draggingCard);
+	            } else {
+	                column.insertBefore(draggingCard, afterElement);
+	            }
+	            column.classList.add('drag-over');
+	        });
+	
+	        column.addEventListener('dragleave', () => {
+	            column.classList.remove('drag-over');
+	        });
+	
+	        column.addEventListener('drop', () => {
+	            column.classList.remove('drag-over');
+	        });
+	    });
+	
+	    function getDragAfterElement(container, y) {
+	        const draggableElements = [...container.querySelectorAll('.task-card:not(.dragging)')];
+	
+	        return draggableElements.reduce((closest, child) => {
+	            const box = child.getBoundingClientRect();
+	            const offset = y - box.top - box.height / 2;
+	            if (offset < 0 && offset > closest.offset) {
+	                return { offset: offset, element: child };
+	            } else {
+	                return closest;
+	            }
+	        }, { offset: Number.NEGATIVE_INFINITY }).element;
+	    }
+    </script>
 </body>
 </html>
