@@ -132,7 +132,7 @@
             <button class="login-button" type="submit">로그인</button>
         </form>
         <div class="login-footer">
-            계정이 없으신가요? <a href="/register">회원가입</a>
+            계정이 없으신가요? <a href="/TASK/views/signup.jsp">회원가입</a>
         </div>
     </div>
 </body>

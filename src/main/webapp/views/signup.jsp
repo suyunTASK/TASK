@@ -122,10 +122,6 @@
                 <input type="text" id="username" name="username" placeholder="아이디를 입력하세요" required>
             </div>
             <div class="input-group">
-                <label for="email">이메일</label>
-                <input type="email" id="email" name="email" placeholder="이메일을 입력하세요" required>
-            </div>
-            <div class="input-group">
                 <label for="password">비밀번호</label>
                 <input type="password" id="password" name="password" placeholder="비밀번호를 입력하세요" required>
             </div>
@@ -136,7 +132,7 @@
             <button class="register-button" type="submit">회원가입</button>
         </form>
         <div class="register-footer">
-            이미 계정이 있으신가요? <a href="/login">로그인</a>
+            이미 계정이 있으신가요? <a href="/TASK/views/login.jsp">로그인</a>
         </div>
     </div>
 </body>
