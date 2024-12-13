@@ -224,7 +224,7 @@
 <body>
 	<!-- 왼쪽 사이드바 -->
     <div class="sidebar">
-        <div class="logo">Team Manager</div>
+        <div class="logo">TASK</div>
         <div class="team-list">
             <div class="team-item active">웹개발 프로젝트</div>
             <div class="team-item">마케팅 프로젝트</div>

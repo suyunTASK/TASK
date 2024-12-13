@@ -227,7 +227,7 @@
 <body>
     <!-- 왼쪽 사이드바 -->
     <div class="sidebar">
-        <div class="logo">Team Manager</div>
+        <div class="logo">TASK</div>
         <div class="team-list">
             <div class="team-item active">웹개발 프로젝트</div>
             <div class="team-item">마케팅 프로젝트</div>
@@ -247,10 +247,10 @@
         <!-- 상단 네비게이션 -->
         <div class="top-nav">
             <div class="nav-links">
-                <div class="nav-link active">할 일</div>
-                <div class="nav-link">주간 일정표</div>
-                <div class="nav-link">캘린더</div>
-                <div class="nav-link">업무 별 블록</div>
+                <div class="nav-link active" onClick="location.href='main.jsp'">할 일</div>
+                <div class="nav-link" onClick="location.href='weekend.jsp'">주간 일정표</div>
+                <div class="nav-link" onClick="location.href='calendar.jsp'"">캘린더</div>
+                <div class="nav-link" onClick="location.href='blockByTask.jsp'">업무 별 블록</div>
             </div>
             <button class="add-task-btn" onClick="location.href='addTask.jsp'">+ 새 업무</button>
         </div>	
