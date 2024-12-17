@@ -12,15 +12,15 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class TeamTodoDAO {
-    final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
-    final String JDBC_URL = "jdbc:mysql://localhost:3307/tukoreadb";
+	final String JDBC_DRIVER = "org.mariadb.jdbc.Driver";
+    final String JDBC_URL = "jdbc:mariadb://192.168.162.187/task";
 
     // DB 연결 메서드
     public Connection open() {
         Connection conn = null;
         try {
             Class.forName(JDBC_DRIVER);
-            conn = DriverManager.getConnection(JDBC_URL, "tukorea", "1234");
+            conn = DriverManager.getConnection(JDBC_URL, "kdk", "1234");
         } catch (Exception e) {
             e.printStackTrace();
         }
