@@ -4,7 +4,7 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>팀 프로젝트!</title>
+    <title>TASK</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
     <style>
         * {
@@ -240,9 +240,9 @@
     <div class="sidebar">
         <div class="logo" onClick="location.href='main.jsp'">TASK</div>
         <div class="team-list">
-            <div class="team-item active">웹개발 프로젝트</div>
-            <div class="team-item">마케팅 프로젝트</div>
-            <div class="team-item">디자인 프로젝트</div>
+            <div class="team-item active">개인 프로젝트</div>
+            <div class="team-item">팀 프로젝트</div>
+            <div class="team-item">ㅇㅇ 프로젝트</div>
         </div>
         <div class="team-leader">
             <img src="/api/placeholder/40/40" alt="Team Leader">
