@@ -46,7 +46,7 @@ body {
     animation: slideIn 0.5s ease-out;
     display: flex;
     flex-direction: column;
-    gap: 32px;
+    gap: 20px;
 }
 
 /* 로고 스타일 */
@@ -56,7 +56,6 @@ body {
     text-align: center;
     cursor: pointer;
     padding: 8px 0;
-    margin-bottom: 8px;
 }
 
 /* 팀 리더 정보 섹션 */
@@ -64,16 +63,38 @@ body {
     display: flex;
     align-items: center;
     padding: 16px;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 12px;
-    margin-bottom: 8px;
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.15));
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.2); /* 테두리 색상 밝게 */
+    box-shadow: 
+        0 4px 12px rgba(0, 0, 0, 0.1),
+        inset 0 1px 1px rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+    transition: all 0.3s ease;
+}
+
+.team-leader:hover {
+    transform: translateY(-2px);
+    box-shadow: 
+        0 6px 16px rgba(0, 0, 0, 0.15),
+        inset 0 1px 1px rgba(255, 255, 255, 0.2);
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.1));
+    border: 1px solid rgba(255, 255, 255, 0.3); /* Hover 시 테두리 색상 밝게 */
 }
 
 .team-leader img {
-    width: 44px;
-    height: 44px;
+    width: 48px;
+    height: 48px;
     border-radius: 50%;
     margin-right: 16px;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.team-leader:hover img {
+    border-color: rgba(255, 255, 255, 0.3);
+    transform: scale(1.05);
 }
 
 .team-leader div {
@@ -82,9 +103,29 @@ body {
     gap: 4px;
 }
 
+.team-leader div > div {
+    font-size: 1.1em;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.95);
+    letter-spacing: 0.3px;
+}
+
 .team-leader small {
-    opacity: 0.8;
-    font-size: 0.9em;
+    color: rgba(255, 255, 255, 1);
+    font-size: 0.85em;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    background: rgba(243, 156, 18, 1);
+    padding: 3px 8px;
+    border-radius: 12px;
+    align-self: flex-start;
+    transition: all 0.3s ease;
+}
+
+.team-leader:hover small {
+    background: rgba(243, 156, 18, 0.8);
+    color: rgba(255, 255, 255, 0.8);
 }
 
 /* 프로젝트 카테고리 섹션 */
@@ -137,7 +178,7 @@ body {
     cursor: pointer;
     padding: 10px 16px;
     border-radius: 8px;
-    font-size: 0.95em;
+    font-size: 1.0em;
     transition: all 0.3s ease;
     width: 100%;
     margin-top: 16px;
@@ -147,7 +188,6 @@ body {
     background: rgba(255, 255, 255, 0.1);
     border-color: rgba(255, 255, 255, 0.6);
 }
-
 
 
 /* 프로젝트 추가 모달 스타일 */
@@ -423,7 +463,7 @@ body {
 				<div class="project-item">개인 프로젝트 2</div>
 			</div>
 		</div>
-
+		
 		<!-- 팀 프로젝트 섹션 -->
 		<div class="project-category">
 			<div class="category-header">팀 프로젝트</div>

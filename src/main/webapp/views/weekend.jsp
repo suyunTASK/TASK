@@ -13,7 +13,7 @@
             box-sizing: border-box;
         }
 
-        @keyframes slideIn {
+   @keyframes slideIn {
             from { transform: translateX(-100%); opacity: 0; }
             to { transform: translateX(0); opacity: 1; }
         }
@@ -27,8 +27,7 @@
             0% { transform: scale(1); }
             50% { transform: scale(1.05); }
             100% { transform: scale(1); }
-        }
-
+        } 
         body {
             font-family: 'Noto Sans KR', sans-serif;
             display: flex;
@@ -36,57 +35,174 @@
             background: #f5f7fa;
         }
 
-        /* 사이드바 스타일 */
-        .sidebar {
-            width: 250px;
-            background: linear-gradient(180deg, #2c3e50, #3498db);
-            color: white;
-            padding: 20px;
-            animation: slideIn 0.5s ease-out;
-        }
+/* 왼쪽 사이드바 (메인.jsp와 동일) */
+/* 사이드바 기본 스타일 */
+.sidebar {
+    width: 280px;
+    background: linear-gradient(180deg, #2c3e50, #3498db);
+    color: white;
+    padding: 24px 20px;
+    animation: slideIn 0.5s ease-out;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
 
-        .logo {
-            font-size: 1.5em;
-            font-weight: bold;
-            margin-bottom: 30px;
-            text-align: center;
-        }
+/* 로고 스타일 */
+.logo {
+    font-size: 1.7em;
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
+    padding: 8px 0;
+}
 
-        .team-list {
-            margin-bottom: 30px;
-        }
+/* 팀 리더 정보 섹션 */
+.team-leader {
+    display: flex;
+    align-items: center;
+    padding: 16px;
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.15));
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.2); /* 테두리 색상 밝게 */
+    box-shadow: 
+        0 4px 12px rgba(0, 0, 0, 0.1),
+        inset 0 1px 1px rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+    transition: all 0.3s ease;
+}
 
-        .team-item {
-            padding: 10px;
-            margin-bottom: 10px;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
+.team-leader:hover {
+    transform: translateY(-2px);
+    box-shadow: 
+        0 6px 16px rgba(0, 0, 0, 0.15),
+        inset 0 1px 1px rgba(255, 255, 255, 0.2);
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.1));
+    border: 1px solid rgba(255, 255, 255, 0.3); /* Hover 시 테두리 색상 밝게 */
+}
 
-        .team-item:hover {
-            background: rgba(255,255,255,0.1);
-        }
+.team-leader img {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    margin-right: 16px;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
 
-        .team-item.active {
-            background: rgba(255,255,255,0.2);
-        }
+.team-leader:hover img {
+    border-color: rgba(255, 255, 255, 0.3);
+    transform: scale(1.05);
+}
 
-        .team-leader {
-            display: flex;
-            align-items: center;
-            padding: 15px;
-            background: rgba(255,255,255,0.1);
-            border-radius: 8px;
-            margin-top: 20px;
-        }
+.team-leader div {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
 
-        .team-leader img {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            margin-right: 10px;
-        }
+.team-leader div > div {
+    font-size: 1.1em;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.95);
+    letter-spacing: 0.3px;
+}
+
+.team-leader small {
+    color: rgba(255, 255, 255, 1);
+    font-size: 0.85em;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    background: rgba(243, 156, 18, 1);
+    padding: 3px 8px;
+    border-radius: 12px;
+    align-self: flex-start;
+    transition: all 0.3s ease;
+}
+
+.team-leader:hover small {
+    background: rgba(243, 156, 18, 0.8);
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* 프로젝트 카테고리 섹션 */
+.project-category {
+    margin-bottom: 24px;
+}
+
+.category-header {
+    font-weight: 500;
+    color: #ecf0f1;
+    margin-bottom: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.1em;
+    padding: 0 8px;
+}
+
+.project-list {
+    margin-left: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.project-item {
+    padding: 12px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+}
+
+.project-item:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateX(4px);
+}
+
+.project-item.active {
+    background: rgba(255, 255, 255, 0.2);
+    font-weight: 500;
+}
+
+/* 프로젝트 추가 버튼 */
+.add-project-btn {
+    background: none;
+    border: 1.5px dashed rgba(255, 255, 255, 0.4);
+    color: #ecf0f1;
+    cursor: pointer;
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-size: 1.0em;
+    transition: all 0.3s ease;
+    width: 100%;
+    margin-top: 16px;
+}
+
+.add-project-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.6);
+}
+
+
+/* 프로젝트 추가 모달 스타일 */
+.modal {
+	display: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.5);
+	justify-content: center;
+	align-items: center;
+	z-index: 1000;
+}
+
 
         /* 메인 콘텐츠 영역 */
         .main-content {
@@ -243,22 +359,70 @@
     </style>
 </head>
 <body>
-    <!-- 사이드바 -->
-    <div class="sidebar">
-        <div class="logo">Team Manager</div>
-        <div class="team-list">
-            <div class="team-item">웹개발 프로젝트</div>
-            <div class="team-item">마케팅 프로젝트</div>
-            <div class="team-item">디자인 프로젝트</div>
-        </div>
-        <div class="team-leader">
-            <img src="/api/placeholder/40/40" alt="Team Leader">
-            <div>
-                <div>김지훈</div>
-                <small>팀장</small>
-            </div>
-        </div>
-    </div>
+    	<!-- main.jsp와 동일 -->
+	<!-- 사이드바 -->
+	<div class="sidebar">
+		<div class="logo" onClick="location.href='main.jsp'">TASK</div>
+		
+		
+		<!-- 팀 리더 정보 -->
+		<div class="team-leader">
+			<img src="/api/placeholder/40/40" alt="Team Leader">
+			<div>
+				<div>김지훈</div>
+				<small>팀장</small>
+			</div>
+		</div>
+
+		<!-- 개인 프로젝트 섹션 -->
+		<div class="project-category">
+			<div class="category-header">개인 프로젝트</div>
+			<div class="project-list" id="personal-projects">
+				<div class="project-item active">개인 프로젝트 1</div>
+				<div class="project-item">개인 프로젝트 2</div>
+			</div>
+		</div>
+
+		<!-- 팀 프로젝트 섹션 -->
+		<div class="project-category">
+			<div class="category-header">팀 프로젝트</div>
+			<div class="project-list" id="team-projects">
+				<div class="project-item">팀 프로젝트 1</div>
+				<div class="project-item">팀 프로젝트 2</div>
+			</div>
+			<!-- 프로젝트 추가 섹션 -->
+			<div class="project-category">
+				<button class="add-project-btn" onclick="openModal('personal')">+
+					프로젝트 추가</button>
+			</div>
+		</div>
+
+	</div>
+
+	<!-- 프로젝트 추가 모달 -->
+	<div class="modal" id="projectModal">
+		<div class="modal-content">
+			<div class="modal-header">새 프로젝트 추가</div>
+			<form id="projectForm">
+				<div class="form-group">
+					<label for="projectName">프로젝트 이름</label> <input type="text"
+						id="projectName" required>
+				</div>
+				<div class="form-group">
+					<label for="projectType">프로젝트 유형</label> <select id="projectType"
+						required>
+						<option value="personal">개인 프로젝트</option>
+						<option value="team">팀 프로젝트</option>
+					</select>
+				</div>
+				<div class="modal-buttons">
+					<button type="button" class="modal-btn btn-cancel"
+						onclick="closeModal()">취소</button>
+					<button type="submit" class="modal-btn btn-submit">추가</button>
+				</div>
+			</form>
+		</div>
+	</div>
 
     <!-- 메인 콘텐츠 -->
     <div class="main-content">
@@ -364,6 +528,67 @@
     </div>
 
     <script>
+    
+    // 프로젝트 모달 관련 함수
+    const modal = document.getElementById('projectModal');
+    const projectForm = document.getElementById('projectForm');
+    const projectTypeSelect = document.getElementById('projectType');
+
+    function openModal(type) {
+        modal.classList.add('show');
+        projectTypeSelect.value = type;
+    }
+
+    function closeModal() {
+        modal.classList.remove('show');
+        projectForm.reset();
+    }
+
+    projectForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const projectName = document.getElementById('projectName').value;
+        const projectType = projectTypeSelect.value;
+        
+        // 새 프로젝트 아이템 생성
+        const newProject = document.createElement('div');
+        newProject.className = 'project-item';
+        newProject.textContent = projectName;
+
+        // 해당하는 프로젝트 리스트에 추가
+        const targetList = document.getElementById(${projectType}-projects);
+        targetList.appendChild(newProject);
+
+        // 새로 추가된 프로젝트에 클릭 이벤트 리스너 추가
+        newProject.addEventListener('click', function() {
+            document.querySelectorAll('.project-item').forEach(p => {
+                p.classList.remove('active');
+            });
+            this.classList.add('active');
+        });
+
+        closeModal();
+    });
+    
+    // 프로젝트 아이템 활성화 처리
+    document.querySelectorAll('.project-item').forEach(item => {
+        item.addEventListener('click', function() {
+            // 모든 프로젝트에서 active 클래스 제거
+            document.querySelectorAll('.project-item').forEach(p => {
+                p.classList.remove('active');
+            });
+            // 클릭된 프로젝트에 active 클래스 추가
+            this.classList.add('active');
+        });
+    });
+
+    // 모달 외부 클릭시 닫기
+    modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+            closeModal();
+        }
+    });
+    // 모달처리 끝
+    
         // 현재 주 상태 관리
         let currentWeek = new Date();
 
