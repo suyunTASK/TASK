@@ -15,51 +15,21 @@
 	box-sizing: border-box;
 }
 
-@
-keyframes slideIn {from { transform:translateX(-100%);
-	opacity: 0;
-}
+ @keyframes slideIn {
+            from { transform: translateX(-100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
 
-to {
-	transform: translateX(0);
-	opacity: 1;
-}
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
 
-}
-@
-keyframes fadeIn {from { opacity:0;
-	
-}
-
-to {
-	opacity: 1;
-}
-
-}
-@
-keyframes pulse { 0% {
-	transform: scale(1);
-}
-
-50
-%
-{
-transform
-:
-scale(
-1.05
-);
-}
-100
-%
-{
-transform
-:
-scale(
-1
-);
-}
-}
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
 body {
 	font-family: 'Noto Sans KR', sans-serif;
 	display: flex;
@@ -67,98 +37,118 @@ body {
 	background: #f5f7fa;
 }
 
-/* 사이드바 스타일 */
+/* 사이드바 기본 스타일 */
 .sidebar {
-	width: 280px;
-	background: linear-gradient(180deg, #2c3e50, #3498db);
-	color: white;
-	padding: 20px;
-	animation: slideIn 0.5s ease-out;
-	display: flex;
-	flex-direction: column;
+    width: 280px;
+    background: linear-gradient(180deg, #2c3e50, #3498db);
+    color: white;
+    padding: 24px 20px;
+    animation: slideIn 0.5s ease-out;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
 }
 
+/* 로고 스타일 */
 .logo {
-	font-size: 1.5em;
-	font-weight: bold;
-	margin-bottom: 30px;
-	text-align: center;
-	cursor: pointer;
+    font-size: 1.7em;
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
+    padding: 8px 0;
+    margin-bottom: 8px;
 }
 
-.project-category {
-	margin-bottom: 20px;
-}
-
-.category-header {
-	font-weight: 500;
-	color: #ecf0f1;
-	margin-bottom: 10px;
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-}
-
-.project-list {
-	margin-left: 10px;
-}
-
-.project-item {
-	padding: 8px 12px;
-	margin-bottom: 8px;
-	border-radius: 6px;
-	cursor: pointer;
-	transition: all 0.3s ease;
-	display: flex;
-	align-items: center;
-}
-
-.project-item:hover {
-	background: rgba(255, 255, 255, 0.1);
-}
-
-.project-item.active {
-	background: rgba(255, 255, 255, 0.2);
-}
-
-.add-project-btn {
-	background: none;
-	border: none;
-	color: #ecf0f1;
-	cursor: pointer;
-	padding: 5px;
-	border-radius: 4px;
-	font-size: 1em; 
-	transition: all 0.5s ease;
-}
-
-.add-project-btn:hover {
-	background: rgba(255, 255, 255, 0.1);
-}
-
-.project-category:last-child {
-    margin-top: 20px; 
-}
-
-.add-project-btn {
-    margin-top: 20px; 
-}
-
+/* 팀 리더 정보 섹션 */
 .team-leader {
-	margin-top: auto;
-	display: flex;
-	align-items: center;
-	padding: 15px;
-	background: rgba(255, 255, 255, 0.1);
-	border-radius: 8px;
+    display: flex;
+    align-items: center;
+    padding: 16px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    margin-bottom: 8px;
 }
 
 .team-leader img {
-	width: 40px;
-	height: 40px;
-	border-radius: 50%;
-	margin-right: 10px;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    margin-right: 16px;
 }
+
+.team-leader div {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.team-leader small {
+    opacity: 0.8;
+    font-size: 0.9em;
+}
+
+/* 프로젝트 카테고리 섹션 */
+.project-category {
+    margin-bottom: 24px;
+}
+
+.category-header {
+    font-weight: 500;
+    color: #ecf0f1;
+    margin-bottom: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.1em;
+    padding: 0 8px;
+}
+
+.project-list {
+    margin-left: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.project-item {
+    padding: 12px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+}
+
+.project-item:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateX(4px);
+}
+
+.project-item.active {
+    background: rgba(255, 255, 255, 0.2);
+    font-weight: 500;
+}
+
+/* 프로젝트 추가 버튼 */
+.add-project-btn {
+    background: none;
+    border: 1.5px dashed rgba(255, 255, 255, 0.4);
+    color: #ecf0f1;
+    cursor: pointer;
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-size: 0.95em;
+    transition: all 0.3s ease;
+    width: 100%;
+    margin-top: 16px;
+}
+
+.add-project-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.6);
+}
+
+
 
 /* 프로젝트 추가 모달 스타일 */
 .modal {
@@ -414,6 +404,16 @@ body {
 	<!-- 사이드바 -->
 	<div class="sidebar">
 		<div class="logo" onClick="location.href='main.jsp'">TASK</div>
+		
+		
+		<!-- 팀 리더 정보 -->
+		<div class="team-leader">
+			<img src="/api/placeholder/40/40" alt="Team Leader">
+			<div>
+				<div>김지훈</div>
+				<small>팀장</small>
+			</div>
+		</div>
 
 		<!-- 개인 프로젝트 섹션 -->
 		<div class="project-category">
@@ -438,14 +438,6 @@ body {
 			</div>
 		</div>
 
-		<!-- 팀 리더 정보 -->
-		<div class="team-leader">
-			<img src="/api/placeholder/40/40" alt="Team Leader">
-			<div>
-				<div>김지훈</div>
-				<small>팀장</small>
-			</div>
-		</div>
 	</div>
 
 	<!-- 프로젝트 추가 모달 -->
