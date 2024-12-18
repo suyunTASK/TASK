@@ -1,4 +1,4 @@
-package com.example.skedule;
+package com.example.demo.skedule;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -9,12 +9,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
+
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 
 @Component
 public class TeamTodoDAO {
+    
 	final String JDBC_DRIVER = "org.mariadb.jdbc.Driver";
-    final String JDBC_URL = "jdbc:mariadb://192.168.162.187/task";
-
+    final String JDBC_URL = "jdbc:mariadb://192.168.162.24/task";
+    
     // DB 연결 메서드
     public Connection open() {
         Connection conn = null;

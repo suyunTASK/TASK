@@ -1,8 +1,8 @@
-package com.example.skedule;
+package com.example.demo.skedule;
 
 public class User{
 	int user_id;
-	String passward;
+	String password;
 	String name;
 	public int getUserId() {
 		return user_id;
@@ -10,11 +10,11 @@ public class User{
 	public void setUserId(int user_id) {
 		this.user_id = user_id;
 	}
-	public String getPassward() {
-		return passward;
+	public String getPassword() {
+		return password;
 	}
-	public void setPassward(String passward) {
-		this.passward = passward;
+	public void setPassword(String passward) {
+		this.password = passward;
 	}
 	public String getName() {
 		return name;
