@@ -27,7 +27,58 @@ public class UserDAO {
         return conn;
     }
 
-    // 모든 사용자 목록 가져오기
+    // 로그인 메서드
+    public boolean checkLogin(String name, String password) {
+        Connection conn = open();
+        String sql = "SELECT * FROM user WHERE name = ? AND passward = ?";
+        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, name);
+            pstmt.setString(2, password);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                return true; // 로그인 성공
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false; // 로그인 실패
+    }
+
+    // 회원가입 메서드 (아이디 중복 검사 후 회원 등록)
+    public boolean registerUser(User user) {
+        if (isNameExists(user.getName())) {
+            return false; // 중복된 이름 존재
+        }
+        Connection conn = open();
+        String sql = "INSERT INTO user (passward, name) VALUES (?, ?)";
+        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, user.getPassward());
+            pstmt.setString(2, user.getName());
+            pstmt.executeUpdate();
+            return true; // 회원가입 성공
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false; // 회원가입 실패
+    }
+
+    // 아이디 중복 검사 메서드
+    private boolean isNameExists(String name) {
+        Connection conn = open();
+        String sql = "SELECT * FROM user WHERE name = ?";
+        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, name);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                return true; // 중복된 아이디 존재
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    // 기존 코드 (모든 사용자 가져오기)
     public List<User> getAllUsers() throws Exception {
         Connection conn = open();
         List<User> userList = new ArrayList<>();
@@ -45,66 +96,6 @@ public class UserDAO {
                 userList.add(user);
             }
             return userList;
-        }
-    }
-
-    // 특정 사용자 정보 가져오기
-    public User getUser(int userId) throws SQLException {
-        Connection conn = open();
-        User user = new User();
-        String sql = "SELECT user_id, passward, name FROM user WHERE user_id = ?";
-        PreparedStatement pstmt = conn.prepareStatement(sql);
-        pstmt.setInt(1, userId);
-        ResultSet rs = pstmt.executeQuery();
-
-        try (conn; pstmt; rs) {
-            if (rs.next()) {
-                user.setUserId(rs.getInt("user_id"));
-                user.setPassward(rs.getString("passward"));
-                user.setName(rs.getString("name"));
-            }
-            return user;
-        }
-    }
-
-    // 사용자 추가 메서드
-    public void addUser(User user) throws Exception {
-        Connection conn = open();
-        String sql = "INSERT INTO user (passward, name) VALUES (?, ?)";
-        PreparedStatement pstmt = conn.prepareStatement(sql);
-
-        try (conn; pstmt) {
-            pstmt.setString(1, user.getPassward());
-            pstmt.setString(2, user.getName());
-            pstmt.executeUpdate();
-        }
-    }
-
-    // 사용자 삭제 메서드
-    public void deleteUser(int userId) throws SQLException {
-        Connection conn = open();
-        String sql = "DELETE FROM user WHERE user_id = ?";
-        PreparedStatement pstmt = conn.prepareStatement(sql);
-
-        try (conn; pstmt) {
-            pstmt.setInt(1, userId);
-            if (pstmt.executeUpdate() == 0) {
-                throw new SQLException("DB 오류: 삭제할 사용자가 없습니다.");
-            }
-        }
-    }
-
-    // 사용자 정보 수정 메서드
-    public void editUser(User user) throws Exception {
-        Connection conn = open();
-        String sql = "UPDATE user SET passward = ?, name = ? WHERE user_id = ?";
-        PreparedStatement pstmt = conn.prepareStatement(sql);
-
-        try (conn; pstmt) {
-            pstmt.setString(1, user.getPassward());
-            pstmt.setString(2, user.getName());
-            pstmt.setInt(3, user.getUserId());
-            pstmt.executeUpdate();
         }
     }
 }
