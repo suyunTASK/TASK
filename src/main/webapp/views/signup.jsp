@@ -117,7 +117,7 @@
         <div class="register-logo">
             <img src="../image/TASK.png" alt="Task Logo">
         </div>
-        <form class="register-form" action="../login/signup" method="post">
+        <form class="register-form" action="../skedule/login/signup" method="post">
 	        <c:if test="${not empty errorMessage}">
     			<div style="color: red; text-align: center; margin-bottom: 10px;">
         			<c:out value="${errorMessage}" />

@@ -62,7 +62,7 @@ public class UserController {
     	
     	if(!password.equals(confirmPassword)) {
     		model.addAttribute("errorMessage", "비밀번호가 일치하지 않습니다.");
-    		return "signup";
+    		return "../views/signup.jsp";
     	}
     	
     	User user = new User();
@@ -71,7 +71,7 @@ public class UserController {
     	
     	boolean isRegistered = userDAO.registerUser(user);
     	if(isRegistered) {
-    		return "redirect:/login/login";
+    		return "redirect:/views/login.jsp";
     	}
     	else {
     		model.addAttribute("errorMessage", "회원가입 실패! 중복된 아이디입니다.");
