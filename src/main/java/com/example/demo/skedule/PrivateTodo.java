@@ -1,19 +1,18 @@
-package com.example.skedule;
+package com.example.demo.skedule;
 
-public class TeamTodo {
-	int team_todo_id;
+public class PrivateTodo {
+	int private_todo_id;
 	String todo_name;
 	String st_time;
 	String ed_time;
 	String day;
 	String color;
 	int user_id;
-	int team_id;
-	public int getTeamTodoId() {
-		return team_todo_id;
+	public int getPrivateTodoId() {
+		return private_todo_id;
 	}
-	public void setTeamTodoId(int team_todo_id) {
-		this.team_todo_id = team_todo_id;
+	public void setPrivateTodoId(int private_todo_id) {
+		this.private_todo_id = private_todo_id;
 	}
 	public String getTodoName() {
 		return todo_name;
@@ -50,11 +49,5 @@ public class TeamTodo {
 	}
 	public void setUserId(int user_id) {
 		this.user_id = user_id;
-	}
-	public int getTeamId() {
-		return team_id;
-	}
-	public void setTeamId(int team_id) {
-		this.team_id = team_id;
 	}
 }

@@ -1,4 +1,4 @@
-package com.example.skedule;
+package com.example.demo.skedule;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

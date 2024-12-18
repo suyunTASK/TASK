@@ -1,4 +1,4 @@
-package com.example.skedule;
+package com.example.demo.skedule;
 
 public class User{
 	int user_id;
