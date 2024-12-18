@@ -1,25 +1,40 @@
 package com.example.skedule;
 
-public class User{
-	int user_id;
-	String passward;
-	String name;
+public class User {
+	private int userId;
+	private String password;
+	private String name;
+
+	public User() {
+	}
+
+	public User(String name, String password) {
+		this.name = name;
+		this.password = password;
+	}
+
 	public int getUserId() {
-		return user_id;
+		return userId;
 	}
-	public void setUserId(int user_id) {
-		this.user_id = user_id;
+
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
-	public String getPassward() {
-		return passward;
+
+	public String getPassword() {
+		return password;
 	}
-	public void setPassward(String passward) {
-		this.passward = passward;
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
+
 	public String getName() {
 		return name;
 	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
+
 }

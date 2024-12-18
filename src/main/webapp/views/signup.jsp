@@ -116,7 +116,14 @@
         <div class="register-logo">
             <img src="../image/TASK.png" alt="Task Logo">
         </div>
-        <form class="register-form" action="/register" method="post">
+        <form class="register-form" action="../login/signup" method="post">
+	        <!-- 오류 메시지 출력 -->
+	        <c:if test="${not empty errorMessage}">
+	            <div style="color: red; text-align: center; margin-bottom: 10px;">
+	                ${errorMessage}
+	            </div>
+	        </c:if>
+	        
             <div class="input-group">
                 <label for="username">아이디</label>
                 <input type="text" id="username" name="username" placeholder="아이디를 입력하세요" required>

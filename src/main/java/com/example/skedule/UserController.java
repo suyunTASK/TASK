@@ -5,6 +5,9 @@ import com.example.skedule.UserDAO;
 import jakarta.servlet.http.HttpSession;
 
 import com.example.skedule.User;
+
+import java.sql.SQLException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,7 +27,7 @@ public class UserController {
     // 로그인 페이지 이동
     @GetMapping("/login")
     public String showLoginPage() {
-        return "login"; // login.jsp
+        return "../TASK/views/login.jsp"; // login.jsp
     }
 
     // 로그인 처리
@@ -39,7 +42,7 @@ public class UserController {
             return "redirect:/user/welcome"; // 로그인 성공 시
         } else {
             model.addAttribute("errorMessage", "로그인 실패! 아이디 또는 비밀번호를 확인해주세요.");
-            return "login"; // 실패 시 다시 login.jsp로
+            return "../TASK/views/login.jsp"; // 실패 시 다시 login.jsp로
         }
     }
 
@@ -52,14 +55,28 @@ public class UserController {
 
     // 회원가입 처리
     @PostMapping("/signup")
-    public String registerUser(@ModelAttribute("user") User user, Model model) {
-        boolean isRegistered = userDAO.registerUser(user);
-        if (isRegistered) {
-            return "redirect:/user/login"; // 회원가입 성공 후 로그인 페이지로 이동
-        } else {
-            model.addAttribute("errorMessage", "회원가입 실패! 중복된 아이디입니다.");
-            return "signup";
-        }
+    public String registerUser(@RequestParam("username") String username,
+    							@RequestParam("password") String password,
+    							@RequestParam("confirm-password") String confirmPassword,
+    							Model model) throws SQLException {
+    	
+    	if(!password.equals(confirmPassword)) {
+    		model.addAttribute("errorMessage", "비밀번호가 일치하지 않습니다.");
+    		return "../views/signup.jsp";
+    	}
+    	
+    	User user = new User();
+    	user.setName(username);
+    	user.setPassword(password);
+    	
+    	boolean isRegistered = userDAO.registerUser(user);
+    	if(isRegistered) {
+    		return "redirect:/views/login.jsp";
+    	}
+    	else {
+    		model.addAttribute("errorMessage", "회원가입 실패! 중복된 아이디입니다.");
+    		return "../views/signup.jsp";
+    	}
     }
 
     // 로그인 성공 후 환영 페이지
