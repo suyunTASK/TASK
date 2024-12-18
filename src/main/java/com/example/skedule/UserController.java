@@ -27,7 +27,7 @@ public class UserController {
     // 로그인 페이지 이동
     @GetMapping("/login")
     public String showLoginPage() {
-        return "../TASK/views/login.jsp"; // login.jsp
+        return "login"; // login.jsp
     }
 
     // 로그인 처리
@@ -62,7 +62,7 @@ public class UserController {
     	
     	if(!password.equals(confirmPassword)) {
     		model.addAttribute("errorMessage", "비밀번호가 일치하지 않습니다.");
-    		return "../views/signup.jsp";
+    		return "signup";
     	}
     	
     	User user = new User();
@@ -71,7 +71,7 @@ public class UserController {
     	
     	boolean isRegistered = userDAO.registerUser(user);
     	if(isRegistered) {
-    		return "redirect:/views/login.jsp";
+    		return "redirect:/login/login";
     	}
     	else {
     		model.addAttribute("errorMessage", "회원가입 실패! 중복된 아이디입니다.");

@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class UserDAO {
     private static final String JDBC_DRIVER = "org.mariadb.jdbc.Driver";
-    private static final String DB_URL = "jdbc:mariadb://192.168.162.187/task";
+    private static final String DB_URL = "jdbc:mariadb://192.168.162.24/task";
     private static final String DB_USER = "kdk";
     private static final String DB_PASSWORD = "1234";
     
