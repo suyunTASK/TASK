@@ -232,14 +232,8 @@ to {
 </style>
 </head>
 <body>
-	<!-- 왼쪽 사이드바 -->
-	<div class="sidebar">
-		<div class="logo">PROJECT</div>
-		<div class="team-list">
-			<div class="team-item active">마이 프로젝트</div>
-			<div class="team-item">팀 프로젝트</div>
-		</div>
-	</div>
+	<!-- 사이드바 -->
+	<jsp:include page="sidebar.jsp" />
 
 	<!-- 새 프로젝트 생성 메인 콘텐츠 -->
 	<div class="main-content">

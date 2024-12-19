@@ -1,37 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<div class="sidebar">
-	<div class="logo" onClick="location.href='main.jsp'">TASK</div>
-
-	<div class="team-leader">
-		<img src="/api/placeholder/40/40" alt="Team Leader">
-		<div>
-			<div>김지훈</div>
-			<small>팀장</small>
-		</div>
-	</div>
-
-	<div class="project-category">
-		<div class="category-header">개인 프로젝트</div>
-		<div class="project-list" id="personal-projects">
-			<div class="project-item active">개인 프로젝트 1</div>
-			<div class="project-item">개인 프로젝트 2</div>
-		</div>
-	</div>
-
-	<div class="project-category">
-		<div class="category-header">팀 프로젝트</div>
-		<div class="project-list" id="team-projects">
-			<div class="project-item">팀 프로젝트 1</div>
-			<div class="project-item">팀 프로젝트 2</div>
-		</div>
-		<div class="project-category">
-			<button class="add-project-btn" onclick="openModal('personal')">+
-				프로젝트 추가</button>
-		</div>
-	</div>
-</div>
-
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>TASK</title>
 <style>
 .sidebar {
 	width: 280px;
@@ -183,3 +156,38 @@
 	border-color: rgba(255, 255, 255, 0.6);
 }
 </style>
+</head>
+<body>
+<!-- 사이드바 -->
+<div class="sidebar">
+	<div class="logo" onClick="location.href='main.jsp'">TASK</div>
+
+	<div class="team-leader">
+		<img src="/api/placeholder/40/40" alt="Team Leader">
+		<div>
+			<div>김지훈</div>
+			<small>팀장</small>
+		</div>
+	</div>
+
+	<div class="project-category">
+		<div class="category-header">개인 프로젝트</div>
+		<div class="project-list" id="personal-projects">
+			<div class="project-item active">개인 프로젝트 1</div>
+			<div class="project-item">개인 프로젝트 2</div>
+		</div>
+	</div>
+
+	<div class="project-category">
+		<div class="category-header">팀 프로젝트</div>
+		<div class="project-list" id="team-projects">
+			<div class="project-item">팀 프로젝트 1</div>
+			<div class="project-item">팀 프로젝트 2</div>
+		</div>
+		<div class="project-category">
+			<button class="add-project-btn" onclick="location.href='addProject.jsp'">+ 프로젝트 추가</button>
+		</div>
+	</div>
+</div>
+</body>
+</html>
