@@ -187,7 +187,6 @@
 			</div>
 		</div>
 	</div>
-	
 	<script>
 		// 팀 프로젝트 목록을 API에서 가져오는 함수
 		async function fetchTeamProjects() {
