@@ -120,7 +120,7 @@
         <div class="login-logo">
             <img src="../image/TASK.png" alt="Task Logo">
         </div>
-		<form class="login-form" action="/TASK/user/login" method="post">
+		<form class="login-form" action="/task/login" method="post">
             <div class="input-group">
                 <label for="username">아이디</label>
                 <input type="text" id="username" name="username" placeholder="아이디를 입력하세요" required>

@@ -37,8 +37,6 @@
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
-<<<<<<< HEAD
-=======
 	<classpathentry kind="src" path="target/generated-sources/annotations">
 		<attributes>
 			<attribute name="optional" value="true"/>
@@ -56,6 +54,5 @@
 			<attribute name="test" value="true"/>
 		</attributes>
 	</classpathentry>
->>>>>>> refs/remotes/origin/bb
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

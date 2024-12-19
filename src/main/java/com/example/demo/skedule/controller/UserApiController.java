@@ -1,15 +1,18 @@
 package com.example.demo.skedule.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import com.example.demo.skedule.User;
 import com.example.demo.skedule.UserDAO;
 
+import jakarta.servlet.http.HttpSession;
+
 import java.sql.SQLException;
 import java.util.List;
 
-@RestController
+@Controller
 @RequestMapping("/user")
 public class UserApiController {
 	final UserDAO userDAO;
@@ -37,22 +40,25 @@ public class UserApiController {
 			e.printStackTrace();
 			return "User API: 사용자 등록 실패!";
 		}
-		return "views/main.jsp";
+		return "redirect:/views/login.jsp";
 	}
 
 	// 사용자 로그인
 	@PostMapping("/login")
-	public String login(@RequestParam("username") String username, @RequestParam("password") String password) {
+	public String login(@RequestParam("username") String username,
+						@RequestParam("password") String password,
+						HttpSession session) {
 		try {
 			User user = userDAO.getUserByName(username); // 사용자 이름으로 검색
 			if (user != null && user.getPassword().equals(password)) {
-				return "views/main.jsp";
+				session.setAttribute("userName", user.getUsername());
+				return "redirect:/main";
 			} else {
-				return "User API: 사용자 이름 또는 비밀번호가 잘못되었습니다!";
+				return "redirect:/views/login.jsp?error=invalid_credentials";
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			return "User API: 로그인 중 오류가 발생했습니다!";
+			return "redirect:/views/login.jsp?error=login_failed";
 		}
 	}
 

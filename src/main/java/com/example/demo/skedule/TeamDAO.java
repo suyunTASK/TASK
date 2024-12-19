@@ -29,12 +29,13 @@ public class TeamDAO {
     }
 
     // 팀 목록 전체를 가져오는 메서드
-    public List<Team> getAllTeams() throws Exception {
+    public List<Team> getAllTeamsById(int user_id) throws Exception {
         Connection conn = open();
         List<Team> teamList = new ArrayList<>();
 
-        String sql = "SELECT team_id, team_todo_id, team_name FROM team";
+        String sql = "SELECT team_id, team_todo_id, team_name FROM team where user_id = ?";
         PreparedStatement pstmt = conn.prepareStatement(sql);
+        pstmt.setInt(1,user_id);
         ResultSet rs = pstmt.executeQuery();
 
         try (conn; pstmt; rs) {

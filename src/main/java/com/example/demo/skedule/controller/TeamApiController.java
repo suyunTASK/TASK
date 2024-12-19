@@ -46,7 +46,7 @@ public class TeamApiController {
     // 팀 목록 조회
     @GetMapping
     public List<Team> getAllTeams() throws Exception {
-        return teamDAO.getAllTeams();
+        return teamDAO.getAllTeamsById(1);
     }
 
     // 특정 팀 상세 정보

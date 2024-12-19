@@ -44,14 +44,14 @@ public class TaskWebController {
 
 	@GetMapping("/login")
 	public String showLoginPage() {
-		return "login";
+		return "/login";
 	}
 
 	@PostMapping("/login")
-	public String login(@PathVariable String name,@PathVariable String password, Model model) {
+	public String login(@ModelAttribute User user, Model model) {
 		try {
-			User user=userDAO.getUserByName(name);
-			if(user.getUsername().equals(password)) {
+			User iuser=userDAO.getUserByName(user.getUsername());
+			if(iuser.getPassword().equals(user.getPassword())) {
 				model.addAttribute("user",user);
 			}
 			else {
@@ -64,13 +64,13 @@ public class TaskWebController {
 			model.addAttribute("error", "사용자가 정상적으로 인증되지 않았습니다!!");
 			return "redirect:/task/login";
 		}
-		return "main";
+		return "/main";
 	}
 
 	// 회원가입 페이지
 	@GetMapping("/signup")
 	public String showSignupPage() {
-		return "signup";
+		return "/signup";
 	}
 
 	@PostMapping("/signup")
