@@ -163,7 +163,7 @@
 		<div class="logo" onClick="location.href='main.jsp'">TASK</div>
 
 		<div class="team-leader">
-			<img src="/api/placeholder/40/40" alt="Team Leader">
+			<img src="../image/user.png" alt="Team Leader">
 			<div>
 				<div>${userName}</div>
 				<small>팀장</small>
