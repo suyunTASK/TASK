@@ -23,9 +23,9 @@ public class UserApiController {
 	// 사용자 등록
 	@PostMapping(consumes = "multipart/form-data")
 	public String signup(@RequestParam("username") String username, @RequestParam("password") String password,
-			@RequestParam("confirm-password") String confirmPassword) {
+			@RequestParam("confirm-password") String confirmPassword) throws Exception {
 		if (!password.equals(confirmPassword)) {
-			return "User API: 비밀번호가 일치하지 않습니다!";
+			return "redirect:/views/signup.jsp";
 		}
 
 		User user = new User();
@@ -34,11 +34,11 @@ public class UserApiController {
 
 		try {
 			userDAO.addUser(user);
-		} catch (Exception e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
-			return "User API: 사용자 등록 실패!";
+			return "redirect:/views/signup.jsp";
 		}
-		return "redirect:/views/main.jsp";
+		return "redirect:/views/login.jsp";
 	}
 
 	// 사용자 로그인
@@ -47,13 +47,13 @@ public class UserApiController {
 		try {
 			User user = userDAO.getUserByName(username); // 사용자 이름으로 검색
 			if (user != null && user.getPassword().equals(password)) {
-				return "main";
+				return "redirect:/views/main.jsp";
 			} else {
-				return "User API: 사용자 이름 또는 비밀번호가 잘못되었습니다!";
+				return "redirect:/views/login.jsp";
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			return "User API: 로그인 중 오류가 발생했습니다!";
+			return "redirect:/views/login.jsp";
 		}
 	}
 

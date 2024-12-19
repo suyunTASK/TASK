@@ -67,7 +67,7 @@ public class UserDAO {
     }
 
     // 사용자 추가 메서드
-    public void addUser(User user) throws Exception {
+    public void addUser(User user) throws SQLException {
         Connection conn = open();
         String sql = "INSERT INTO user (name, password) VALUES (?, ?)";
         PreparedStatement pstmt = conn.prepareStatement(sql);
