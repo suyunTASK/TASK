@@ -13,12 +13,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class TeamUsersDAO {
 	final String JDBC_DRIVER = "org.mariadb.jdbc.Driver";
-<<<<<<< HEAD
-    final String JDBC_URL = "jdbc:mariadb://192.168.162.187/task";
-=======
-    final String JDBC_URL = "jdbc:mariadb://192.168.162.24/task";
->>>>>>> refs/remotes/origin/bb
-
     // DB 연결 메서드
     public Connection open() {
         Connection conn = null;
@@ -32,12 +26,13 @@ public class TeamUsersDAO {
     }
 
     // 모든 팀 사용자 목록 가져오기
-    public List<TeamUsers> getAllTeamUsers() throws Exception {
+    public List<TeamUsers> getAllTeamUsersById(int userId) throws Exception {
         Connection conn = open();
         List<TeamUsers> teamUsersList = new ArrayList<>();
 
-        String sql = "SELECT team_id, user_id, role, Leader FROM team_users";
+        String sql = "SELECT team_id, user_id, role, Leader FROM team_users where user_id = ?";
         PreparedStatement pstmt = conn.prepareStatement(sql);
+        pstmt.setInt(userId);
         ResultSet rs = pstmt.executeQuery();
 
         try (conn; pstmt; rs) {
