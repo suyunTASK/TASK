@@ -451,7 +451,7 @@ body {
 		<div class="team-leader">
 			<img src="/api/placeholder/40/40" alt="Team Leader">
 			<div>
-				<div>김지훈</div>
+				<div>${userName}</div>
 				<small>팀장</small>
 			</div>
 		</div>
