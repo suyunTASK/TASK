@@ -437,7 +437,7 @@
             <div class="calendar-header">
                 <div class="calendar-title">
                     <button class="calendar-nav-btn" id="prevMonth">&lt;</button>
-                    <span id="currentMonth">2024년 6월</span>
+                    <span id="currentMonth">00년 00월</span>
                     <button class="calendar-nav-btn" id="nextMonth">&gt;</button>
                 </div>
               
@@ -570,7 +570,7 @@
                 
                 dayElement.addEventListener('click', () => {
                     // 날짜 클릭 시 이벤트 처리 (예: 해당 날짜의 이벤트 보기)
-                    alert('${currentDate.getFullYear()}년 ${currentDate.getMonth() + 1}월 ${day}일 클릭됨');
+                    alert(year + '년 ' + month + '월 ' + day + '일 ' + '클릭됨');
                 });
                 
                 calendarDays.appendChild(dayElement);
