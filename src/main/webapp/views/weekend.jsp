@@ -438,12 +438,18 @@ body {
         // 주 포맷팅 함수
         function formatWeek(date) {
             const startOfWeek = new Date(date);
-            startOfWeek.setDate(date.getDate() - date.getDay() + 1);
+            startOfWeek.setDate(date.getDate() - date.getDay());
             
             const endOfWeek = new Date(startOfWeek);
             endOfWeek.setDate(startOfWeek.getDate() + 6);
-
-            return '${startOfWeek.getMonth() + 1}월 ${startOfWeek.getDate()}일 - ${endOfWeek.getMonth() + 1}월 ${endOfWeek.getDate()}일';
+            
+            const startmonth = String(startOfWeek.getMonth() + 1);
+            const startdate = String(startOfWeek.getDate());
+            
+            const endmonth = String(endOfWeek.getMonth() + 1);
+            const enddate = String(endOfWeek.getDate());
+         //startmonth + '월' + startdate + '일' + '-' + endmonth + '월' + enddate + '일'
+            return startmonth + '월' + startdate + '일' + '-' + endmonth + '월' + enddate + '일';
         }
 
         // 주 업데이트 함수
