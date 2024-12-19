@@ -158,36 +158,37 @@
 </style>
 </head>
 <body>
-<!-- 사이드바 -->
-<div class="sidebar">
-	<div class="logo" onClick="location.href='main.jsp'">TASK</div>
+	<!-- 사이드바 -->
+	<div class="sidebar">
+		<div class="logo" onClick="location.href='main.jsp'">TASK</div>
 
-	<div class="team-leader">
-		<img src="/api/placeholder/40/40" alt="Team Leader">
-		<div>
-			<div>김지훈</div>
-			<small>팀장</small>
+		<div class="team-leader">
+			<img src="/api/placeholder/40/40" alt="Team Leader">
+			<div>
+				<div>김지훈</div>
+				<small>팀장</small>
+			</div>
 		</div>
-	</div>
 
-	<div class="project-category">
-		<div class="category-header">개인 프로젝트</div>
-		<div class="project-list" id="personal-projects">
-			<div class="project-item active">개인 프로젝트 1</div>
-			<div class="project-item">개인 프로젝트 2</div>
-		</div>
-	</div>
-
-	<div class="project-category">
-		<div class="category-header">팀 프로젝트</div>
-		<div class="project-list" id="team-projects">
-			<div class="project-item">팀 프로젝트 1</div>
-			<div class="project-item">팀 프로젝트 2</div>
-		</div>
 		<div class="project-category">
-			<button class="add-project-btn" onclick="location.href='addProject.jsp'">+ 프로젝트 추가</button>
+			<div class="category-header">개인 프로젝트</div>
+			<div class="project-list" id="personal-projects">
+				<div class="project-item active">개인 프로젝트 1</div>
+				<div class="project-item">개인 프로젝트 2</div>
+			</div>
+		</div>
+
+		<div class="project-category">
+			<div class="category-header">팀 프로젝트</div>
+			<div class="project-list" id="team-projects">
+				<div class="project-item">팀 프로젝트 1</div>
+				<div class="project-item">팀 프로젝트 2</div>
+			</div>
+			<div class="project-category">
+				<button class="add-project-btn"
+					onclick="location.href='addProject.jsp'">+ 프로젝트 추가</button>
+			</div>
 		</div>
 	</div>
-</div>
 </body>
 </html>
