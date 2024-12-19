@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class TeamDAO {
 	final String JDBC_DRIVER = "org.mariadb.jdbc.Driver";
-    final String JDBC_URL = "jdbc:mariadb://192.168.162.24/task";
+    final String JDBC_URL = "jdbc:mariadb://192.168.163.225/task";
 
     // DB 연결 메서드
     public Connection open() {
@@ -32,15 +32,13 @@ public class TeamDAO {
         Connection conn = open();
         List<Team> teamList = new ArrayList<>();
 
-        String sql = "SELECT team_id, team_todo_id, team_name FROM team";
+        String sql = "SELECT team_name FROM team";
         PreparedStatement pstmt = conn.prepareStatement(sql);
         ResultSet rs = pstmt.executeQuery();
 
         try (conn; pstmt; rs) {
             while (rs.next()) {
                 Team team = new Team();
-                team.setTeamId(rs.getInt("team_id"));
-                team.setTeamTodoId(rs.getInt("team_todo_id"));
                 team.setTeamName(rs.getString("team_name"));
                 teamList.add(team);
             }

@@ -18,6 +18,6 @@ public class MainController {
 		}
 		
 		model.addAttribute("userName", userName);
-		return "main";
+		return "redirect:/views/main.jsp";
 	}
 }

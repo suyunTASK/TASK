@@ -165,7 +165,7 @@
 		<div class="team-leader">
 			<img src="/api/placeholder/40/40" alt="Team Leader">
 			<div>
-				<div>김지훈</div>
+				<div>${userName}</div>
 				<small>팀장</small>
 			</div>
 		</div>
@@ -173,22 +173,47 @@
 		<div class="project-category">
 			<div class="category-header">개인 프로젝트</div>
 			<div class="project-list" id="personal-projects">
-				<div class="project-item active">개인 프로젝트 1</div>
-				<div class="project-item">개인 프로젝트 2</div>
+				<div class="project-item active">개인 프로젝트</div>
 			</div>
 		</div>
 
 		<div class="project-category">
 			<div class="category-header">팀 프로젝트</div>
 			<div class="project-list" id="team-projects">
-				<div class="project-item">팀 프로젝트 1</div>
-				<div class="project-item">팀 프로젝트 2</div>
+				<!-- 동적으로 팀 목록 추가 -->
 			</div>
 			<div class="project-category">
-				<button class="add-project-btn"
-					onclick="location.href='addProject.jsp'">+ 프로젝트 추가</button>
+				<button class="add-project-btn" onclick="location.href='addProject.jsp'">+ 프로젝트 추가</button>
 			</div>
 		</div>
 	</div>
+	
+	<script>
+		// 팀 프로젝트 목록을 API에서 가져오는 함수
+		async function fetchTeamProjects() {
+			try {
+				// API 호출 (RESTful API를 통해 팀 목록을 가져옴)
+				const response = await fetch('/api/teams');
+				if (!response.ok) {
+					throw new Error('팀 목록을 가져오는 데 실패했습니다.');
+				}
+				const teams = await response.json();
+
+				// 팀 프로젝트 목록을 동적으로 생성
+				const teamProjectsContainer = document.getElementById('team-projects');
+				teams.forEach(team => {
+					const projectItem = document.createElement('div');
+					projectItem.classList.add('project-item');
+					projectItem.textContent = team.teamName; // 팀 이름을 표시
+					teamProjectsContainer.appendChild(projectItem);
+				});
+			} catch (error) {
+				console.error('Error fetching team projects:', error);
+			}
+		}
+
+		// 페이지 로드 시 팀 프로젝트 목록을 가져옴
+		window.onload = fetchTeamProjects;
+	</script>
 </body>
 </html>
