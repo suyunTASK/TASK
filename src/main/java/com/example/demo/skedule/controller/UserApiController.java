@@ -37,7 +37,7 @@ public class UserApiController {
 			e.printStackTrace();
 			return "User API: 사용자 등록 실패!";
 		}
-		return "views/main.jsp";
+		return "redirect:/views/main.jsp";
 	}
 
 	// 사용자 로그인
@@ -46,7 +46,7 @@ public class UserApiController {
 		try {
 			User user = userDAO.getUserByName(username); // 사용자 이름으로 검색
 			if (user != null && user.getPassword().equals(password)) {
-				return "views/main.jsp";
+				return "main";
 			} else {
 				return "User API: 사용자 이름 또는 비밀번호가 잘못되었습니다!";
 			}

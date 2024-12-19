@@ -391,9 +391,9 @@ to {
 
 	<!-- 새 업무 추가 메인 콘텐츠 -->
 	<div class="main-content">
-		<div class="add-task-container">
+		<div class="add-task-container">z
 			<h2 class="form-title">새 업무 추가</h2>
-			<form action="/addTask" method="post">
+			<form action="/Task/private?action=addTask" method="post" enctype="multipart/form-data">
 				<div class="form-group">
 					<label for="taskTitle">업무 제목</label> <input type="text"
 						id="taskTitle" name="taskTitle" required
