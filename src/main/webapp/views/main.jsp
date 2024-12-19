@@ -325,7 +325,8 @@ body {
 	background: #3498db;
 	color: white;
 	border: none;
-	padding: 5px 10px;
+	padding: 8px 16px;
+	font-size: 1em;
 	border-radius: 5px;
 	cursor: pointer;
 	transition: all 0.3s ease;
