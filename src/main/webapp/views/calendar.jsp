@@ -536,9 +536,10 @@
             
             // 연도를 두 자리 형식으로 변환
             const year = String(currentDate.getFullYear()).slice(2); // '2024' -> '24'
+            const month = String(currentDate.getMonth() + 1);
             
             // 월 표시 업데이트
-            monthDisplay.textContent = '${year}년 ${currentDate.getMonth() + 1}월';
+            monthDisplay.textContent = year + '년 ' + month + '월';
             
             // 캘린더 초기화
             calendarDays.innerHTML = '';
