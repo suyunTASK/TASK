@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.*;
 import com.example.demo.skedule.User;
 import com.example.demo.skedule.UserDAO;
 
+import jakarta.servlet.http.HttpSession;
+
 import java.sql.SQLException;
 import java.util.List;
 
@@ -23,9 +25,9 @@ public class UserApiController {
 	// 사용자 등록
 	@PostMapping(consumes = "multipart/form-data")
 	public String signup(@RequestParam("username") String username, @RequestParam("password") String password,
-			@RequestParam("confirm-password") String confirmPassword) throws Exception {
+			@RequestParam("confirm-password") String confirmPassword) {
 		if (!password.equals(confirmPassword)) {
-			return "redirect:/views/signup.jsp";
+			return "User API: 비밀번호가 일치하지 않습니다!";
 		}
 
 		User user = new User();
@@ -34,26 +36,29 @@ public class UserApiController {
 
 		try {
 			userDAO.addUser(user);
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
-			return "redirect:/views/signup.jsp";
+			return "User API: 사용자 등록 실패!";
 		}
 		return "redirect:/views/login.jsp";
 	}
 
 	// 사용자 로그인
 	@PostMapping("/login")
-	public String login(@RequestParam("username") String username, @RequestParam("password") String password) {
+	public String login(@RequestParam("username") String username,
+						@RequestParam("password") String password,
+						HttpSession session) {
 		try {
 			User user = userDAO.getUserByName(username); // 사용자 이름으로 검색
 			if (user != null && user.getPassword().equals(password)) {
-				return "redirect:/views/main.jsp";
+				session.setAttribute("userName", user.getUsername());
+				return "redirect:/main";
 			} else {
-				return "redirect:/views/login.jsp";
+				return "redirect:/views/login.jsp?error=invalid_credentials";
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			return "redirect:/views/login.jsp";
+			return "redirect:/views/login.jsp?error=login_failed";
 		}
 	}
 

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -113,6 +114,13 @@
         .login-footer a:hover {
             color: #2980b9;
         }
+        
+        .error-message {
+        	color: red;
+        	font-size: 0.9em;
+        	margin-bottom: 15px;
+        	text-align: center;
+        }
     </style>
 </head>
 <body>
@@ -120,6 +128,23 @@
         <div class="login-logo">
             <img src="../image/TASK.png" alt="Task Logo">
         </div>
+        
+        <c:if test="${not empty param.error}">
+        	<div class="error-message">
+        		<c:choose>
+        			<c:when test="${param.error == 'invalid_credentials' }">
+        				아이디 또는 비밀번호가 잘못되었습니다.
+        			</c:when>
+        			<c:when test="${param.error == 'login_failed' }">
+        				로그인 중 오류가 발생했습니다. 다시 시도해주세요.
+        			</c:when>
+        			<c:otherwise>
+        				알 수 없는 오류가 발생했습니다.
+        			</c:otherwise>
+        		</c:choose>
+        	</div>
+        </c:if>
+        
 		<form class="login-form" action="/TASK/user/login" method="post">
             <div class="input-group">
                 <label for="username">아이디</label>
