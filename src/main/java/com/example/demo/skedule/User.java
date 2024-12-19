@@ -2,24 +2,25 @@ package com.example.demo.skedule;
 
 public class User{
 	int user_id;
-	String passward;
-	String name;
+	String username;
+	String password;
+
 	public int getUserId() {
 		return user_id;
 	}
 	public void setUserId(int user_id) {
 		this.user_id = user_id;
 	}
-	public String getPassward() {
-		return passward;
+	public String getUsername() {
+		return username;
 	}
-	public void setPassward(String passward) {
-		this.passward = passward;
+	public void setUsername(String name) {
+		this.username = username;
 	}
-	public String getName() {
-		return name;
+	public String getPassword() {
+		return password;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setPassword(String passward) {
+		this.password = passward;
 	}
 }

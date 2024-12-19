@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class UserDAO {
     final String JDBC_DRIVER = "org.mariadb.jdbc.Driver";
-    final String JDBC_URL = "jdbc:mariadb://192.168.162.187/task";
+    final String JDBC_URL = "jdbc:mariadb://192.168.162.24/task";
 
     // DB 연결 메서드
     public Connection open() {
@@ -32,7 +32,7 @@ public class UserDAO {
         Connection conn = open();
         List<User> userList = new ArrayList<>();
 
-        String sql = "SELECT user_id, passward, name FROM user";
+        String sql = "SELECT user_id, password, name FROM user";
         PreparedStatement pstmt = conn.prepareStatement(sql);
         ResultSet rs = pstmt.executeQuery();
 
@@ -40,8 +40,8 @@ public class UserDAO {
             while (rs.next()) {
                 User user = new User();
                 user.setUserId(rs.getInt("user_id"));
-                user.setPassward(rs.getString("passward"));
-                user.setName(rs.getString("name"));
+                user.setPassword(rs.getString("password"));
+                user.setUsername(rs.getString("name"));
                 userList.add(user);
             }
             return userList;
@@ -49,19 +49,19 @@ public class UserDAO {
     }
 
     // 특정 사용자 정보 가져오기
-    public User getUser(int userId) throws SQLException {
+    public User getUserByName(String username) throws SQLException {
         Connection conn = open();
         User user = new User();
-        String sql = "SELECT user_id, passward, name FROM user WHERE user_id = ?";
+        String sql = "SELECT user_id, password, name FROM user WHERE username = ?";
         PreparedStatement pstmt = conn.prepareStatement(sql);
-        pstmt.setInt(1, userId);
+        pstmt.setString(1, username);
         ResultSet rs = pstmt.executeQuery();
 
         try (conn; pstmt; rs) {
             if (rs.next()) {
                 user.setUserId(rs.getInt("user_id"));
-                user.setPassward(rs.getString("passward"));
-                user.setName(rs.getString("name"));
+                user.setPassword(rs.getString("password"));
+                user.setUsername(rs.getString("name"));
             }
             return user;
         }
@@ -70,12 +70,12 @@ public class UserDAO {
     // 사용자 추가 메서드
     public void addUser(User user) throws Exception {
         Connection conn = open();
-        String sql = "INSERT INTO user (passward, name) VALUES (?, ?)";
+        String sql = "INSERT INTO user (password, name) VALUES (?, ?)";
         PreparedStatement pstmt = conn.prepareStatement(sql);
 
         try (conn; pstmt) {
-            pstmt.setString(1, user.getPassward());
-            pstmt.setString(2, user.getName());
+            pstmt.setString(1, user.getPassword());
+            pstmt.setString(2, user.getUsername());
             pstmt.executeUpdate();
         }
     }
@@ -97,12 +97,12 @@ public class UserDAO {
     // 사용자 정보 수정 메서드
     public void editUser(User user) throws Exception {
         Connection conn = open();
-        String sql = "UPDATE user SET passward = ?, name = ? WHERE user_id = ?";
+        String sql = "UPDATE user SET password = ?, name = ? WHERE user_id = ?";
         PreparedStatement pstmt = conn.prepareStatement(sql);
 
         try (conn; pstmt) {
-            pstmt.setString(1, user.getPassward());
-            pstmt.setString(2, user.getName());
+            pstmt.setString(1, user.getPassword());
+            pstmt.setString(2, user.getUsername());
             pstmt.setInt(3, user.getUserId());
             pstmt.executeUpdate();
         }

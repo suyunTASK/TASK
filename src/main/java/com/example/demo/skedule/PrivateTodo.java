@@ -8,7 +8,6 @@ public class PrivateTodo {
 	String day;
 	String color;
 	int user_id;
-	
 	public int getPrivateTodoId() {
 		return private_todo_id;
 	}
