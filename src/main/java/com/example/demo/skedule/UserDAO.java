@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class UserDAO {
     final String JDBC_DRIVER = "org.mariadb.jdbc.Driver";
-    final String JDBC_URL = "jdbc:mariadb://172.16.2.170/task";
+    final String JDBC_URL = "jdbc:mariadb://192.168.163.225/task";
 
     // DB 연결 메서드
     public Connection open() {

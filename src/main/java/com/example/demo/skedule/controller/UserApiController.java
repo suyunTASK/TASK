@@ -1,6 +1,7 @@
 package com.example.demo.skedule.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import com.example.demo.skedule.User;
@@ -9,7 +10,7 @@ import com.example.demo.skedule.UserDAO;
 import java.sql.SQLException;
 import java.util.List;
 
-@RestController
+@Controller
 @RequestMapping("/user")
 public class UserApiController {
 	final UserDAO userDAO;
