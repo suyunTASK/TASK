@@ -13,7 +13,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class TeamUsersDAO {
 	final String JDBC_DRIVER = "org.mariadb.jdbc.Driver";
+<<<<<<< HEAD
     final String JDBC_URL = "jdbc:mariadb://192.168.162.187/task";
+=======
+    final String JDBC_URL = "jdbc:mariadb://192.168.162.24/task";
+>>>>>>> refs/remotes/origin/bb
 
     // DB 연결 메서드
     public Connection open() {

@@ -9,12 +9,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Component;
+<<<<<<< HEAD
 
 @Component
 public class TeamTodoDAO {
 	final String JDBC_DRIVER = "org.mariadb.jdbc.Driver";
     final String JDBC_URL = "jdbc:mariadb://192.168.162.187/task";
 
+=======
+import org.springframework.stereotype.Repository;
+
+@Component
+public class TeamTodoDAO {
+    
+	final String JDBC_DRIVER = "org.mariadb.jdbc.Driver";
+    final String JDBC_URL = "jdbc:mariadb://192.168.162.24/task";
+    
+>>>>>>> refs/remotes/origin/bb
     // DB 연결 메서드
     public Connection open() {
         Connection conn = null;
