@@ -41,7 +41,7 @@ public class UserDAO {
                 User user = new User();
                 user.setUserId(rs.getInt("user_id"));
                 user.setPassword(rs.getString("password"));
-                user.setName(rs.getString("name"));
+                user.setUsername(rs.getString("name"));
                 userList.add(user);
             }
             return userList;
@@ -49,19 +49,19 @@ public class UserDAO {
     }
 
     // 특정 사용자 정보 가져오기
-    public User getUser(int userId) throws SQLException {
+    public User getUserByName(String username) throws SQLException {
         Connection conn = open();
         User user = new User();
-        String sql = "SELECT user_id, password, name FROM user WHERE user_id = ?";
+        String sql = "SELECT user_id, password, name FROM user WHERE username = ?";
         PreparedStatement pstmt = conn.prepareStatement(sql);
-        pstmt.setInt(1, userId);
+        pstmt.setString(1, username);
         ResultSet rs = pstmt.executeQuery();
 
         try (conn; pstmt; rs) {
             if (rs.next()) {
                 user.setUserId(rs.getInt("user_id"));
                 user.setPassword(rs.getString("password"));
-                user.setName(rs.getString("name"));
+                user.setUsername(rs.getString("name"));
             }
             return user;
         }
@@ -75,7 +75,7 @@ public class UserDAO {
 
         try (conn; pstmt) {
             pstmt.setString(1, user.getPassword());
-            pstmt.setString(2, user.getName());
+            pstmt.setString(2, user.getUsername());
             pstmt.executeUpdate();
         }
     }
@@ -102,7 +102,7 @@ public class UserDAO {
 
         try (conn; pstmt) {
             pstmt.setString(1, user.getPassword());
-            pstmt.setString(2, user.getName());
+            pstmt.setString(2, user.getUsername());
             pstmt.setInt(3, user.getUserId());
             pstmt.executeUpdate();
         }

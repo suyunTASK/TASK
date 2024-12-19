@@ -116,7 +116,7 @@
         <div class="register-logo">
             <img src="../image/TASK.png" alt="Task Logo">
         </div>
-        <form class="register-form" action="/signup" method="post" enctype="multipart/form-data">
+        <form class="register-form" action="/TASK/user?action=signup" method="post" enctype="multipart/form-data">
             <div class="input-group">
                 <label for="username">아이디</label>
                 <input type="text" id="username" name="username" placeholder="아이디를 입력하세요" required>
