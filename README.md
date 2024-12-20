@@ -106,8 +106,8 @@ INSERT INTO team_todo (todo_name, st_time, ed_time, day, color, user_id, team_id
 VALUES ('팀 회의', '10:00:00', '11:00:00', '월요일', 'red', 1, 1);
 
 -- 개인 일정 삽입
-INSERT INTO private_todo (todo_name, st_time, ed_time, day, color, user_id) 
-VALUES ('개인 공부', '20:00:00', '22:00:00', '화요일', 'blue', 2);
+INSERT INTO private_todo (todo_name, st_time, ed_time, st_day, ed_day, color, user_id) 
+VALUES ('개인 공부', '20:00:00', '22:00:00', '2024-12-21', '2024-12-23', 'blue', 2);
 ```
 ## Step 4: 조회 예시
 ```sql
