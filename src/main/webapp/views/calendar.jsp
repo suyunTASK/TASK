@@ -42,22 +42,51 @@ keyframes pulse { 0% {
 }
 
 50
+
+
 %
 {
 transform
+
+
 :
-scale(
-1.05
-);
+
+
+scale
+(
+
+
+1
+.05
+
+
+)
+;
+
+
 }
 100
+
+
 %
 {
 transform
+
+
 :
-scale(
+
+
+scale
+(
+
+
 1
-);
+
+
+)
+;
+
+
 }
 }
 body {
@@ -256,22 +285,19 @@ body {
 		</div>
 	</div>
 
-
 	<!-- 메인 콘텐츠 -->
 	<div class="main-content">
 		<!-- 상단 네비게이션 -->
 		<div class="top-nav">
 			<div class="nav-links">
-				<div class="nav-links">
-					<div class="nav-link" onClick="location.href='main.jsp'">할 일</div>
-					<div class="nav-link" onClick="location.href='weekend.jsp'">주간
-						일정표</div>
-					<div class="nav-link active" onClick="location.href='calendar.jsp'">캘린더</div>
-					<div class="nav-link" onClick="location.href='blockByTask.jsp'">업무
-						별 블록</div>
-				</div>
+				<div class="nav-link" onClick="location.href='main'">할
+					일</div>
+				<div class="nav-link" onClick="location.href='weekend'">주간 일정표</div>
+				<div class="nav-link active" onClick="location.href='calendar'">캘린더</div>
+				<div class="nav-link" onClick="location.href='blockByTask'">업무
+					별 블록</div>
 			</div>
-			<button class="add-task-btn" onClick="location.href='addTask.jsp'">+
+			<button class="add-task-btn" onClick="location.href='addTask'">+
 				새 업무</button>
 		</div>
 

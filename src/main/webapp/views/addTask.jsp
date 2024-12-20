@@ -391,7 +391,7 @@ to {
 
 	<!-- 새 업무 추가 메인 콘텐츠 -->
 	<div class="main-content">
-		<div class="add-task-container">z
+		<div class="add-task-container">
 			<h2 class="form-title">새 업무 추가</h2>
 			<form action="/Task/private?action=addTask" method="post" enctype="multipart/form-data">
 				<div class="form-group">
@@ -449,7 +449,7 @@ to {
 
 				<div class="btn-group">
 					<button type="button" class="btn btn-secondary"
-						onclick="location.href='main.jsp'">취소</button>
+						onclick="location.href='main'">취소</button>
 					<button type="submit" class="btn btn-primary">업무 추가</button>
 				</div>
 			</form>

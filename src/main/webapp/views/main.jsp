@@ -15,21 +15,51 @@
 	box-sizing: border-box;
 }
 
- @keyframes slideIn {
-            from { transform: translateX(-100%); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
-        }
+@
+keyframes slideIn {from { transform:translateX(-100%);
+	opacity: 0;
+}
 
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
+to {
+	transform: translateX(0);
+	opacity: 1;
+}
 
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
+}
+@
+keyframes fadeIn {from { opacity:0;
+	
+}
+
+to {
+	opacity: 1;
+}
+
+}
+@
+keyframes pulse { 0% {
+	transform: scale(1);
+}
+
+50
+%
+{
+transform
+:
+scale(
+1.05
+);
+}
+100
+%
+{
+transform
+:
+scale(
+1
+);
+}
+}
 body {
 	font-family: 'Noto Sans KR', sans-serif;
 	display: flex;
@@ -101,7 +131,6 @@ body {
 	gap: 10px;
 	margin-top: 20px;
 }
-
 
 .modal-btn {
 	padding: 8px 16px;
@@ -291,7 +320,7 @@ body {
 <body>
 	<!-- 사이드바 -->
 	<jsp:include page="sidebar.jsp" />
-	
+
 	<!-- 프로젝트 추가 모달 -->
 	<div class="modal" id="projectModal">
 		<div class="modal-content">
@@ -322,15 +351,14 @@ body {
 		<!-- 상단 네비게이션 -->
 		<div class="top-nav">
 			<div class="nav-links">
-				<div class="nav-link active" onClick="location.href='main.jsp'">할
+				<div class="nav-link active" onClick="location.href='main'">할
 					일</div>
-				<div class="nav-link" onClick="location.href='weekend.jsp'">주간
-					일정표</div>
-				<div class="nav-link" onClick="location.href='calendar.jsp'">캘린더</div>
-				<div class="nav-link" onClick="location.href='blockByTask.jsp'">업무
+				<div class="nav-link" onClick="location.href='weekend'">주간 일정표</div>
+				<div class="nav-link" onClick="location.href='calendar'">캘린더</div>
+				<div class="nav-link" onClick="location.href='blockByTask'">업무
 					별 블록</div>
 			</div>
-			<button class="add-task-btn" onClick="location.href='addTask.jsp'">+
+			<button class="add-task-btn" onClick="location.href='addTask'">+
 				새 업무</button>
 		</div>
 

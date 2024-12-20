@@ -160,7 +160,7 @@
 <body>
 	<!-- 사이드바 -->
 	<div class="sidebar">
-		<div class="logo" onClick="location.href='main.jsp'">TASK</div>
+		<div class="logo" onClick="location.href='main'">TASK</div>
 
 		<div class="team-leader">
 			<img src="/api/placeholder/40/40" alt="Team Leader">
@@ -184,7 +184,7 @@
 				<!-- 동적으로 팀 목록 추가 -->
 			</div>
 			<div class="project-category">
-				<button class="add-project-btn" onclick="location.href='addProject.jsp'">+ 프로젝트 추가</button>
+				<button class="add-project-btn" onclick="location.href='addProject'">+ 프로젝트 추가</button>
 			</div>
 		</div>
 	</div>

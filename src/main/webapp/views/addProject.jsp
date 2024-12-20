@@ -22,8 +22,6 @@ body {
 	background: #f5f7fa;
 }
 
-
-
 /* Main Content Styles */
 .main-content {
 	flex: 1;
@@ -269,7 +267,7 @@ to {
 
 				<div class="btn-group">
 					<button type="button" class="btn btn-secondary"
-						onclick="location.href='main.jsp'">취소</button>
+						onclick="location.href='main'">취소</button>
 					<button type="submit" class="btn btn-primary">프로젝트 생성</button>
 				</div>
 			</form>

@@ -42,6 +42,7 @@ public class TaskWebController {
 		this.teamUserDAO = teamUserDAO;		
 	}
 
+	// 로그인 페이지
 	@GetMapping("/login")
 	public String showLoginPage() {
 		return "/login";
@@ -53,6 +54,7 @@ public class TaskWebController {
 			User iuser=userDAO.getUserByName(user.getUsername());
 			if(iuser.getPassword().equals(user.getPassword())) {
 				model.addAttribute("user",user);
+				return "redirect:/task/main";
 			}
 			else {
 				logger.warn("로그인 실패!!");
@@ -64,7 +66,6 @@ public class TaskWebController {
 			model.addAttribute("error", "사용자가 정상적으로 인증되지 않았습니다!!");
 			return "redirect:/task/login";
 		}
-		return "/main";
 	}
 
 	// 회원가입 페이지
@@ -95,19 +96,49 @@ public class TaskWebController {
 			logger.error("목록 가져오기 실패", e);
 			model.addAttribute("error", "Failed to load todos");
 		}
-		return "view/main";
+		return "/main";
 	}
 
-	@PostMapping("/addTodo")
+	// 주간 일정표 페이지
+	@GetMapping("/weekend")
+	public String weekend(Model model) {
+		return "/weekend";
+	}
+	
+	// 캘린더 페이지
+	@GetMapping("/calendar")
+	public String calendar(Model model) {
+		return "/calendar";
+	}
+	
+	// 업무별 블록 페이지
+	@GetMapping("/blockByTask")
+	public String blockByTask(Model model) {
+		return "/blockByTask";
+	}
+	
+	// 새 업무 추가 페이지
+	@GetMapping("/addTask")
+	public String addTask(Model model) {
+		return "/addTask";
+	}
+	
+	@PostMapping("/addTask")
 	public String addTodo(@ModelAttribute PrivateTodo privateTodo, Model model) {
 		try {
 			privateTodoDAO.addPrivateTodo(privateTodo);
-			return "view/main";
+			return "/main";
 		} catch (Exception e) {
 			logger.error("Error adding todo", e);
 			model.addAttribute("error", "Failed to add todo");
 			return "redirect:/task/main";
 		}
+	}
+	
+	// 새 프로젝트 추가 페이지
+	@GetMapping("/addProject")
+	public String addProject(Model model) {
+		return "/addProject";
 	}
 
 	// 팀 목록 출력
