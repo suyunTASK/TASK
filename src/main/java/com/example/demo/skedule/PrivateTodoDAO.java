@@ -9,11 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Repository;
 
 @Component
 public class PrivateTodoDAO {
-	
 	final String JDBC_DRIVER = "org.mariadb.jdbc.Driver";
     final String JDBC_URL = "jdbc:mariadb://192.168.163.225/task";
 

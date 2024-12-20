@@ -49,33 +49,32 @@ public class UserDAO {
     }
 
     // 특정 사용자 정보 가져오기
-    public User getUserByName(String username) throws SQLException {
+    public User getUserByName(String name) throws SQLException {
         Connection conn = open();
         User user = new User();
-        String sql = "SELECT user_id, password, name FROM user WHERE name = ?";
+        String sql = "SELECT name, password FROM user WHERE name = ?";
         PreparedStatement pstmt = conn.prepareStatement(sql);
-        pstmt.setString(1, username);
+        pstmt.setString(1, name);
         ResultSet rs = pstmt.executeQuery();
 
         try (conn; pstmt; rs) {
-            if (rs.next()) {
-                user.setUserId(rs.getInt("user_id"));
+            if (rs.next()) {;
+            	user.setUsername(rs.getString("name"));
                 user.setPassword(rs.getString("password"));
-                user.setUsername(rs.getString("name"));
             }
             return user;
         }
     }
 
-    // 사용자 추가 메서드
-    public void addUser(User user) throws Exception {
+ // 사용자 추가 메서드
+    public void addUser(User user) throws SQLException {
         Connection conn = open();
-        String sql = "INSERT INTO user (password, name) VALUES (?, ?)";
+        String sql = "INSERT INTO user (name, password) VALUES (?, ?)";
         PreparedStatement pstmt = conn.prepareStatement(sql);
 
         try (conn; pstmt) {
-            pstmt.setString(1, user.getPassword());
-            pstmt.setString(2, user.getUsername());
+        	pstmt.setString(1, user.getUsername());
+            pstmt.setString(2, user.getPassword());
             pstmt.executeUpdate();
         }
     }
