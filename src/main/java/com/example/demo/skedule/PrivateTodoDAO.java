@@ -32,7 +32,7 @@ public class PrivateTodoDAO {
         Connection conn = open();
         List<PrivateTodo> todoList = new ArrayList<>();
 
-        String sql = "SELECT private_todo_id, todo_name, st_time, ed_time, day, color, user_id FROM private_todo";
+        String sql = "SELECT private_todo_id, todo_name, st_time, ed_time, st_day, ed_day, color, user_id FROM private_todo";
         PreparedStatement pstmt = conn.prepareStatement(sql);
         ResultSet rs = pstmt.executeQuery();
 
@@ -43,7 +43,8 @@ public class PrivateTodoDAO {
                 todo.setTodoName(rs.getString("todo_name"));
                 todo.setStTime(rs.getString("st_time"));
                 todo.setEdTime(rs.getString("ed_time"));
-                todo.setDay(rs.getString("day"));
+                todo.setStDay(rs.getString("st_day"));
+                todo.setEdDay(rs.getString("ed_day"));
                 todo.setColor(rs.getString("color"));
                 todo.setUserId(rs.getInt("user_id"));
                 todoList.add(todo);
@@ -56,7 +57,7 @@ public class PrivateTodoDAO {
     public PrivateTodo getPrivateTodo(int privateTodoId) throws SQLException {
         Connection conn = open();
         PrivateTodo todo = new PrivateTodo();
-        String sql = "SELECT private_todo_id, todo_name, st_time, ed_time, day, color, user_id FROM private_todo WHERE private_todo_id = ?";
+        String sql = "SELECT private_todo_id, todo_name, st_time, ed_time, st_day, ed_day, color, user_id FROM private_todo WHERE private_todo_id = ?";
         PreparedStatement pstmt = conn.prepareStatement(sql);
         pstmt.setInt(1, privateTodoId);
         ResultSet rs = pstmt.executeQuery();
@@ -67,7 +68,8 @@ public class PrivateTodoDAO {
                 todo.setTodoName(rs.getString("todo_name"));
                 todo.setStTime(rs.getString("st_time"));
                 todo.setEdTime(rs.getString("ed_time"));
-                todo.setDay(rs.getString("day"));
+                todo.setStDay(rs.getString("st_day"));
+                todo.setEdDay(rs.getString("ed_day"));
                 todo.setColor(rs.getString("color"));
                 todo.setUserId(rs.getInt("user_id"));
             }
@@ -78,16 +80,17 @@ public class PrivateTodoDAO {
     // 새로운 개인 TODO 추가하기
     public void addPrivateTodo(PrivateTodo todo) throws Exception {
         Connection conn = open();
-        String sql = "INSERT INTO private_todo (todo_name, st_time, ed_time, day, color, user_id) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO private_todo (todo_name, st_time, ed_time, st_day, ed_day, color, user_id) VALUES (?, ?, ?, ?, ?, ?, ?)";
         PreparedStatement pstmt = conn.prepareStatement(sql);
 
         try (conn; pstmt) {
             pstmt.setString(1, todo.getTodoName());
             pstmt.setString(2, todo.getStTime());
             pstmt.setString(3, todo.getEdTime());
-            pstmt.setString(4, todo.getDay());
-            pstmt.setString(5, todo.getColor());
-            pstmt.setInt(6, todo.getUserId());
+            pstmt.setString(4, todo.getStDay());
+            pstmt.setString(5, todo.getEdDay());
+            pstmt.setString(6, todo.getColor());
+            pstmt.setInt(7, todo.getUserId());
             pstmt.executeUpdate();
         }
     }
@@ -95,17 +98,18 @@ public class PrivateTodoDAO {
     // 개인 TODO 수정하기
     public void editPrivateTodo(PrivateTodo todo) throws Exception {
         Connection conn = open();
-        String sql = "UPDATE private_todo SET todo_name = ?, st_time = ?, ed_time = ?, day = ?, color = ?, user_id = ? WHERE private_todo_id = ?";
+        String sql = "UPDATE private_todo SET todo_name = ?, st_time = ?, ed_time = ?, st_day = ?, ed_day = ?, color = ?, user_id = ? WHERE private_todo_id = ?";
         PreparedStatement pstmt = conn.prepareStatement(sql);
 
         try (conn; pstmt) {
             pstmt.setString(1, todo.getTodoName());
             pstmt.setString(2, todo.getStTime());
             pstmt.setString(3, todo.getEdTime());
-            pstmt.setString(4, todo.getDay());
-            pstmt.setString(5, todo.getColor());
-            pstmt.setInt(6, todo.getUserId());
-            pstmt.setInt(7, todo.getPrivateTodoId());
+            pstmt.setString(4, todo.getStDay());
+            pstmt.setString(5, todo.getEdDay());
+            pstmt.setString(6, todo.getColor());
+            pstmt.setInt(7, todo.getUserId());
+            pstmt.setInt(8, todo.getPrivateTodoId());
             pstmt.executeUpdate();
         }
     }

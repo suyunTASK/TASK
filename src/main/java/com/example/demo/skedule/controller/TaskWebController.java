@@ -15,6 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.skedule.controller.*;
+
+import jakarta.servlet.http.HttpSession;
+
 import com.example.demo.skedule.*;
 
 @Controller
@@ -48,11 +51,12 @@ public class TaskWebController {
 	}
 
 	@PostMapping("/login")
-	public String login(@ModelAttribute User user, Model model) {
+	public String login(@ModelAttribute User user, Model model, HttpSession session) {
 		try {
 			User iuser=userDAO.getUserByName(user.getUsername());
 			if(iuser.getPassword().equals(user.getPassword())) {
 				model.addAttribute("user",user);
+				session.setAttribute("userName", user.getUsername());
 				return "redirect:/task/main";
 			}
 			else {
@@ -87,7 +91,10 @@ public class TaskWebController {
 
 	// 개인 할 일 목록 페이지
 	@GetMapping("/main")
-	public String listTodos(Model model) {
+	public String listTodos(HttpSession session, Model model) {
+		String userName = (String) session.getAttribute("userName");
+		model.addAttribute("userName", userName);
+		
 		try {
 			List<PrivateTodo> todos = privateTodoDAO.getAllPrivateTodos();
 			model.addAttribute("todos", todos);
@@ -96,6 +103,31 @@ public class TaskWebController {
 			model.addAttribute("error", "Failed to load todos");
 		}
 		return "/main";
+	}
+	
+	@PostMapping("/private")
+	public String addPrivateTodo (@ModelAttribute("todo") PrivateTodo todo, HttpSession session, Model model) {
+		
+		try {
+			String userName = (String) session.getAttribute("userName"));
+			if(userName == null) {
+				return "redirect:/task/login";
+			}
+			
+			User user = userDAO.getUserByName(userName);
+			int userId = user.getUserId();
+			
+			todo.setUserId(userId);
+			
+			privateTodoDAO.addPrivateTodo(todo);
+		
+			return "redirect:/task/main";
+		} catch (Exception e) {
+			logger.error("Error adding private todo", e);
+			model.addAttribute("error", "일정 추가 실패");
+			return "redirect:/task/addTask";
+		}
+	
 	}
 
 	// 주간 일정표 페이지
@@ -118,7 +150,7 @@ public class TaskWebController {
 	
 	// 새 업무 추가 페이지
 	@GetMapping("/addTask")
-	public String addTask(Model model) {
+	public String addTask() {
 		return "/addTask";
 	}
 	
