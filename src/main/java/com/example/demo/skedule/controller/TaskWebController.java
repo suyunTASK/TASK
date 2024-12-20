@@ -109,7 +109,7 @@ public class TaskWebController {
 	public String addPrivateTodo (@ModelAttribute("todo") PrivateTodo todo, HttpSession session, Model model) {
 		
 		try {
-			String userName = (String) session.getAttribute("userName"));
+			String userName = (String) session.getAttribute("userName");
 			if(userName == null) {
 				return "redirect:/task/login";
 			}
