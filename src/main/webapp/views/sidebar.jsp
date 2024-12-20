@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -33,7 +35,7 @@
 	padding: 16px;
 	background: linear-gradient(145deg, rgba(255, 255, 255, 0.15));
 	border-radius: 16px;
-	border: 1px solid rgba(255, 255, 255, 0.2); /* 테두리 색상 밝게 */
+	border: 1px solid rgba(255, 255, 255, 0.2);
 	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1), inset 0 1px 1px
 		rgba(255, 255, 255, 0.1);
 	backdrop-filter: blur(5px);
@@ -46,7 +48,7 @@
 		rgba(255, 255, 255, 0.2);
 	background: linear-gradient(145deg, rgba(255, 255, 255, 0.18),
 		rgba(255, 255, 255, 0.1));
-	border: 1px solid rgba(255, 255, 255, 0.3); /* Hover 시 테두리 색상 밝게 */
+	border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 .team-leader img {
@@ -155,51 +157,110 @@
 	background: rgba(255, 255, 255, 0.1);
 	border-color: rgba(255, 255, 255, 0.6);
 }
-</style>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-// 로그인한 사용자 ID를 세션에서 가져와서 Ajax 요청에 포함시킴
-$(document).ready(function() {
-    let userId = <%= session.getAttribute("user_id") %>;  // 세션에서 user_id 가져오기
 
-    $.get('/teams?user_id=' + userId, function(data) {
-        let teamProjectsContainer = $('#team-projects');
-        data.forEach(function(team) {
-            let projectItem = "<div class="project-item">${team.teamName}</div>"";
-            teamProjectsContainer.append(projectItem);
-        });
-    });
-});
-</script>
+/* 로그인/회원가입 섹션 */
+.auth-section {
+	margin-top: auto;
+	padding-top: 20px;
+	border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.auth-button {
+	width: 100%;
+	padding: 12px;
+	margin: 8px 0;
+	border: none;
+	border-radius: 8px;
+	font-size: 1em;
+	cursor: pointer;
+	transition: all 0.3s ease;
+}
+
+.login-btn {
+	background: #2980b9;
+	color: white;
+}
+
+.login-btn:hover {
+	background: #1f639b;
+}
+
+.signup-btn {
+	background: #2980b9;
+	color: white;
+}
+
+.signup-btn:hover {
+	background: #1f639b;
+}
+
+.logout-btn {
+	background: #2980b9;
+	color: white;
+}
+
+.logout-btn:hover {
+	background: #1f639b;
+}
+</style>
 </head>
 <body>
+	<!-- 사이드바 -->
 	<div class="sidebar">
 		<div class="logo" onClick="location.href='main'">TASK</div>
 
-		<div class="team-leader">
-			<img src="../image/user.png" alt="Team Leader">
-			<div>
-				<div>${userName}</div>
-				<small>팀장</small>
-			</div>
-		</div>
+		<!-- 로그인 상태에 따라 표시 -->
+		<c:choose>
+			<c:when test="${not empty sessionScope.user}">
+				<div class="team-leader">
+					<img src="../image/user.png" alt="Team Leader">
+					<div>
+						<div>${sessionScope.user.username}</div>
+						<small>팀장</small>
+					</div>
+				</div>
 
-		<div class="project-category">
-			<div class="category-header">개인 프로젝트</div>
-			<div class="project-list" id="personal-projects">
-				<div class="project-item active">개인 프로젝트</div>
-			</div>
-		</div>
+				<div class="project-category">
+					<div class="category-header">개인 프로젝트</div>
+					<div class="project-list" id="personal-projects">
+						<div class="project-item active">개인 프로젝트</div>
+					</div>
+				</div>
 
-		<div class="project-category">
-			<div class="category-header">팀 프로젝트</div>
-			<div class="project-list" id="team-projects">
-				<!-- 동적으로 팀 목록 추가됨 -->
-			</div>
-			<div class="project-category">
-				<button class="add-project-btn" onclick="location.href='addProject'">+ 프로젝트 추가</button>
-			</div>
-		</div>
+				<div class="project-category">
+					<div class="category-header">팀 프로젝트</div>
+					<div class="project-list" id="team-projects">
+						<ul class="list-group">
+							<c:forEach var="team" items="${teams}">
+						<<li class="list-group-item">
+									<div>${team.teamName}</div>
+								</li>
+							</c:forEach>
+						</ul>
+					</div>
+					<div class="project-category">
+						<button class="add-project-btn"
+							onclick="location.href='addProject'">+ 프로젝트 추가</button>
+					</div>
+				</div>
+
+				<!-- 로그아웃 섹션 -->
+				<div class="auth-section">
+
+					<button class="auth-button logout-btn" onclick="logout'">
+						로그아웃</button>
+				</div>
+			</c:when>
+			<c:otherwise>
+				<!-- 로그인되지 않은 경우 -->
+				<div class="auth-section">
+					<button class="auth-button login-btn"
+						onclick="location.href='login'">로그인</button>
+					<button class="auth-button signup-btn"
+						onclick="location.href='signup'">회원가입</button>
+				</div>
+			</c:otherwise>
+		</c:choose>
 	</div>
 </body>
 </html>

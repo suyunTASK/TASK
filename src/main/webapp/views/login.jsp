@@ -13,9 +13,26 @@
             box-sizing: border-box;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+        @keyframes slideUp {
+            from {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes scaleIn {
+            from {
+                transform: scale(0.95);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
         }
 
         body {
@@ -24,102 +41,153 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            background: #f5f7fa;
-            animation: fadeIn 1s ease-out;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+            padding: 20px;
         }
 
         .login-container {
-            width: 400px;
+            width: 600px;
             background: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            animation: fadeIn 1s ease-out;
+            padding: 50px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            animation: scaleIn 0.6s ease-out;
         }
 
         .login-logo {
             text-align: center;
-            margin-bottom: 20px;
-            
-            text-align: center;
-            font-size: 1.2em;
-            color: #666;
-            margin-bottom: 20px;
+            margin-bottom: 40px;
         }
 
         .login-logo img {
-            width: 210px;
-            height: 120px;
+            width: 160px;
+            height: 96px;
+            object-fit: contain;
         }
 
         .login-form {
             display: flex;
             flex-direction: column;
+            gap: 25px;
         }
 
         .input-group {
-            margin-bottom: 15px;
+            animation: slideUp 0.6s ease-out forwards;
+            opacity: 0;
         }
+
+        .input-group:nth-child(1) { animation-delay: 0.1s; }
+        .input-group:nth-child(2) { animation-delay: 0.2s; }
 
         .input-group label {
             display: block;
-            font-weight: bold;
-            margin-bottom: 5px;
-            color: #666;
+            font-weight: 500;
+            margin-bottom: 10px;
+            color: #333;
+            font-size: 1.1em;
         }
 
         .input-group input {
             width: 100%;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 1em;
+            padding: 16px 20px;
+            border: 2px solid #e1e1e1;
+            border-radius: 10px;
+            font-size: 1.2em;
+            transition: all 0.3s ease;
+            background: #f8f9fa;
         }
 
         .input-group input:focus {
             border-color: #3498db;
+            background: white;
             outline: none;
-            box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
+            box-shadow: 0 0 0 4px rgba(52, 152, 219, 0.1);
         }
 
         .login-button {
-            background: #3498db;
+           background: #3498db;
             color: white;
             border: none;
-            padding: 10px;
-            border-radius: 5px;
-            font-size: 1em;
+            padding: 16px;
+            border-radius: 10px;
+            font-size: 1.3em;
+            font-weight: 500;
             cursor: pointer;
-            transition: background 0.3s ease;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+            animation: slideUp 0.6s 0.4s ease-out forwards;
+            opacity: 0;
         }
 
-        .login-button:hover {
-            background: #2980b9;
+       .login-button:hover {
+       background: #2980b9;
+       transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(41, 128, 185, 0.8);
+       }
+
+
+        .login-button:active {
+            transform: translateY(1);
         }
 
         .login-footer {
-            margin-top: 20px;
+            margin-top: 40px;
             text-align: center;
-            font-size: 0.9em;
+            font-size: 1.2em;
             color: #666;
+            animation: slideUp 0.6s 0.5s ease-out forwards;
+            opacity: 0;
         }
 
         .login-footer a {
             color: #3498db;
             text-decoration: none;
+            font-weight: 500;
             transition: color 0.3s ease;
         }
 
         .login-footer a:hover {
             color: #2980b9;
+            text-decoration: underline;
+        }
+
+        .error-message {
+            color: red;
+            font-size: 1.2em;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        @media (max-width: 600px) {
+            .login-container {
+                width: 100%;
+                padding: 40px 25px;
+            }
         }
     </style>
 </head>
 <body>
     <div class="login-container">
         <div class="login-logo">
-            <img src="/images/TASK.png" alt="Task Logo">
+            <img src="../images/TASK.png" alt="Task Logo">
         </div>
+        
+        <c:if test="${not empty param.error}">
+            <div class="error-message">
+                <c:choose>
+                    <c:when test="${param.error == 'invalid_credentials'}">
+                        아이디 또는 비밀번호가 잘못되었습니다.
+                    </c:when>
+                    <c:when test="${param.error == 'login_failed'}">
+                        로그인 중 오류가 발생했습니다. 다시 시도해주세요.
+                    </c:when>
+                    <c:otherwise>
+                        알 수 없는 오류가 발생했습니다.
+                    </c:otherwise>
+                </c:choose>
+            </div>
+        </c:if>
+        
 		<form class="login-form" action="/task/login" method="post">
             <div class="input-group">
                 <label for="username">아이디</label>

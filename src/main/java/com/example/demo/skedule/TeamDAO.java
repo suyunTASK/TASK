@@ -10,11 +10,11 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
+
 @Component
 public class TeamDAO {
 	final String JDBC_DRIVER = "org.mariadb.jdbc.Driver";
     final String JDBC_URL = "jdbc:mariadb://localhost:3306/task";
-
 
     // DB 연결 메서드
     public Connection open() {
@@ -29,20 +29,17 @@ public class TeamDAO {
     }
 
     // 팀 목록 전체를 가져오는 메서드
-    public List<Team> getAllTeamsById(int user_id) throws Exception {
+    public List<Team> getAllTeams() throws Exception {
         Connection conn = open();
         List<Team> teamList = new ArrayList<>();
 
-        String sql = "SELECT team_id, team_todo_id, team_name FROM team where user_id = ?";
+        String sql = "SELECT team_name FROM team";
         PreparedStatement pstmt = conn.prepareStatement(sql);
-        pstmt.setInt(1,user_id);
         ResultSet rs = pstmt.executeQuery();
 
         try (conn; pstmt; rs) {
             while (rs.next()) {
                 Team team = new Team();
-                team.setTeamId(rs.getInt("team_id"));
-                team.setTeamTodoId(rs.getInt("team_todo_id"));
                 team.setTeamName(rs.getString("team_name"));
                 teamList.add(team);
             }
@@ -54,29 +51,30 @@ public class TeamDAO {
     public Team getTeam(int teamId) throws SQLException {
         Connection conn = open();
         Team team = new Team();
-        String sql = "SELECT team_id, team_todo_id, team_name FROM team WHERE team_id = ?";
+        String sql = "SELECT team_todo_id, team_name FROM team WHERE team_id = ?";
         PreparedStatement pstmt = conn.prepareStatement(sql);
         pstmt.setInt(1, teamId);
         ResultSet rs = pstmt.executeQuery();
 
         try (conn; pstmt; rs) {
             if (rs.next()) {
-                team.setTeamId(rs.getInt("team_id"));
+                //team.setTeamId(rs.getInt("team_id"));
                 team.setTeamTodoId(rs.getInt("team_todo_id"));
                 team.setTeamName(rs.getString("team_name"));
             }
             return team;
         }
     }
-
+ 
     // 팀 추가 메서드
-    public void addTeam(Team team) throws SQLException {
+    public void addTeam(Team team) throws Exception {
         Connection conn = open();
-        String sql = "INSERT INTO team (team_name) VALUES (?)";
+        String sql = "INSERT INTO team (team_todo_id, team_name) VALUES (?, ?)";
         PreparedStatement pstmt = conn.prepareStatement(sql);
 
         try (conn; pstmt) {
-            pstmt.setString(1, team.getTeamName());
+            pstmt.setInt(1, team.getTeamTodoId());
+            pstmt.setString(2, team.getTeamName());
             pstmt.executeUpdate();
         }
     }
@@ -107,4 +105,26 @@ public class TeamDAO {
             pstmt.executeUpdate();
         }
     }
+
+	public List<Team> getAllTeamsById(int userId) throws SQLException {
+		Connection conn = open();
+		List<Team> teamList = new ArrayList<>();
+		String sql = "SELECT DISTINCT team_id, team_todo_id, team_name FROM team WHERE user_id = ?";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setInt(1, userId);
+		//String sql = "select aid, title, img, STR_TO_DATE(date, '%Y-%m-%d') as cdate from news";
+		//PreparedStatement pstmt = conn.prepareStatement(sql);
+		
+		ResultSet rs = pstmt.executeQuery();
+		try (conn; pstmt; rs) {
+			while (rs.next()) {
+				Team t = new Team();
+				t.setTeamId(rs.getInt("team_id"));
+				//t.setTeamTodoId(rs.getInt("team_todo_id"));
+				t.setTeamName(rs.getString("team_name"));
+				teamList.add(t);
+			}
+			return teamList;
+		}
+	}
 }

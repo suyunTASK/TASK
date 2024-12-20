@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
@@ -163,6 +164,11 @@
             <img src="../image/TASK.png" alt="Task Logo">
         </div>
         <form class="register-form" action="/task/signup" method="post" enctype="multipart/form-data">
+	        <c:if test="${not empty errorMessage}">
+    			<div style="color: red; text-align: center; margin-bottom: 10px;">
+        			<c:out value="${errorMessage}" />
+    			</div>
+			</c:if>
             <div class="input-group">
                 <label for="username">아이디</label>
                 <input type="text" id="username" name="username" placeholder="아이디를 입력하세요" required>
@@ -181,5 +187,17 @@
             이미 계정이 있으신가요? <a href="login">로그인</a>
         </div>
     </div>
+    <script>
+	    document.querySelector('.register-form').addEventListener('submit', function(e) {
+	        const password = document.getElementById('password').value;
+	        const confirmPassword = document.getElementById('confirm-password').value;
+	
+	        if (password !== confirmPassword) {
+	            e.preventDefault();
+	            alert('비밀번호가 일치하지 않습니다.');
+	        }
+	    });
+	</script>
+    
 </body>
 </html>
