@@ -1,53 +1,77 @@
 package com.example.demo.skedule;
 
 public class PrivateTodo {
-	int private_todo_id;
-	String todo_name;
-	String st_time;
-	String ed_time;
-	String day;
-	String color;
-	int user_id;
+	private int privateTodoId;
+	private String todoName;
+	private String stTime;
+	private String edTime;
+	private String stDay;
+	private String edDay;
+	private String color;
+	private int userId;
+
 	public int getPrivateTodoId() {
-		return private_todo_id;
+		return privateTodoId;
 	}
-	public void setPrivateTodoId(int private_todo_id) {
-		this.private_todo_id = private_todo_id;
+
+	public void setPrivateTodoId(int privateTodoId) {
+		this.privateTodoId = privateTodoId;
 	}
+
 	public String getTodoName() {
-		return todo_name;
+		return todoName;
 	}
-	public void setTodoName(String todo_name) {
-		this.todo_name = todo_name;
+
+	public void setTodoName(String todoName) {
+		this.todoName = todoName;
 	}
+
 	public String getStTime() {
-		return st_time;
+		return stTime;
 	}
-	public void setStTime(String st_time) {
-		this.st_time = st_time;
+
+	public void setStTime(String stTime) {
+		this.stTime = stTime;
 	}
+
 	public String getEdTime() {
-		return ed_time;
+		return edTime;
 	}
-	public void setEdTime(String ed_time) {
-		this.ed_time = ed_time;
+
+	public void setEdTime(String edTime) {
+		this.edTime = edTime;
 	}
-	public String getDay() {
-		return day;
+
+	public String getStDay() {
+		return stDay;
 	}
-	public void setDay(String day) {
-		this.day = day;
+
+	public void setStDay(String stDay) {
+		this.stDay = stDay;
 	}
+
+	public String getEdDay() {
+		return edDay;
+	}
+
+	public void setEdDay(String edDay) {
+		this.edDay = edDay;
+	}
+
 	public String getColor() {
 		return color;
 	}
+
 	public void setColor(String color) {
 		this.color = color;
 	}
+
 	public int getUserId() {
-		return user_id;
+		return userId;
 	}
-	public void setUserId(int user_id) {
-		this.user_id = user_id;
+
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
+
 }
