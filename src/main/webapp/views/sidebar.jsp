@@ -179,7 +179,7 @@ $(document).ready(function() {
 		<div class="team-leader">
 			<img src="/images/user.png" alt="Team Leader">
 			<div>
-				<div>${userName}</div>
+				<div>${userName}</div> 
 				<small>팀장</small>
 			</div>
 		</div>
