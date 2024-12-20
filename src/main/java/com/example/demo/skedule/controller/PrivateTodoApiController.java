@@ -1,6 +1,7 @@
 package com.example.demo.skedule.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import com.example.demo.skedule.PrivateTodo;
@@ -9,7 +10,7 @@ import com.example.demo.skedule.PrivateTodoDAO;
 import java.sql.SQLException;
 import java.util.List;
 
-@RestController
+@Controller
 @RequestMapping("/api/private-todos")
 public class PrivateTodoApiController {
     final PrivateTodoDAO privateTodoDAO;

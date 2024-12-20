@@ -22,41 +22,9 @@ body {
 	background: #f5f7fa;
 }
 
-.sidebar {
-	width: 250px;
-	background: linear-gradient(180deg, #2c3e50, #3498db);
-	color: white;
-	padding: 20px;
-	animation: slideIn 0.5s ease-out;
-}
 
-.logo {
-	font-size: 1.5em;
-	font-weight: bold;
-	margin-bottom: 30px;
-	text-align: center;
-}
 
-.team-list {
-	margin-bottom: 30px;
-}
-
-.team-item {
-	padding: 10px;
-	margin-bottom: 10px;
-	border-radius: 8px;
-	cursor: pointer;
-	transition: all 0.3s ease;
-}
-
-.team-item:hover {
-	background: rgba(255, 255, 255, 0.1);
-}
-
-.team-item.active {
-	background: rgba(255, 255, 255, 0.2);
-}
-
+/* Main Content Styles */
 .main-content {
 	flex: 1;
 	display: flex;
@@ -232,21 +200,15 @@ to {
 </style>
 </head>
 <body>
-	<!-- 왼쪽 사이드바 -->
-	<div class="sidebar">
-		<div class="logo">PROJECT</div>
-		<div class="team-list">
-			<div class="team-item active">마이 프로젝트</div>
-			<div class="team-item">팀 프로젝트</div>
-		</div>
-	</div>
+	<jsp:include page="sidebar.jsp" />
 
-	<!-- 새 프로젝트 생성 메인 콘텐츠 -->
+	<!-- Main Content -->
 	<div class="main-content">
 		<div class="add-project-container">
 			<h2 class="form-title">새 프로젝트 생성</h2>
 			<form id="projectForm" action="/addProject" method="post">
-				<!-- 프로젝트 유형 선택 -->
+				<!-- Form content remains the same -->
+				<!-- Project type selection -->
 				<div class="form-group">
 					<label>프로젝트 유형</label>
 					<div class="project-type-selection">
@@ -273,7 +235,7 @@ to {
 						placeholder="프로젝트에 대한 간단한 설명을 입력하세요"></textarea>
 				</div>
 
-				<!-- 팀 프로젝트 초대 섹션 -->
+				<!-- Team project invite section -->
 				<div class="team-invite-section" id="teamInviteSection">
 					<div class="form-group">
 						<label>팀원 선택</label>
@@ -293,7 +255,7 @@ to {
 					</div>
 				</div>
 
-				<!-- 초대 URL 섹션 -->
+				<!-- Invite URL section -->
 				<div id="inviteUrlSection" style="display: none;">
 					<div class="form-group">
 						<label>프로젝트 초대 링크</label>
@@ -304,7 +266,6 @@ to {
 							onclick="copyInviteUrl()">URL 복사</button>
 					</div>
 				</div>
-
 
 				<div class="btn-group">
 					<button type="button" class="btn btn-secondary"
@@ -406,15 +367,6 @@ to {
         }
 
         function copyInviteUrl() {
-            const urlText = document.getElementById('inviteUrl').textContent;
-            navigator.clipboard.writeText(urlText).then(() => {
-                alert('초대 링크가 복사되었습니다.');
-            });
-        }
-
-
-        // 초대 URL 복사 기능
-        function copyInviteUrl() {
             const urlText = inviteUrlElement.textContent;
             navigator.clipboard.writeText(urlText).then(() => {
                 alert('초대 링크가 복사되었습니다.');
@@ -422,4 +374,64 @@ to {
         }
     </script>
 </body>
+<script>
+// 프로젝트 모달 관련 함수
+const modal = document.getElementById('projectModal');
+const projectForm = document.getElementById('projectForm');
+const projectTypeSelect = document.getElementById('projectType');
+
+function openModal(type) {
+    modal.classList.add('show');
+    projectTypeSelect.value = type;
+}
+
+function closeModal() {
+    modal.classList.remove('show');
+    projectForm.reset();
+}
+
+projectForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    const projectName = document.getElementById('projectName').value;
+    const projectType = projectTypeSelect.value;
+    
+    // 새 프로젝트 아이템 생성
+    const newProject = document.createElement('div');
+    newProject.className = 'project-item';
+    newProject.textContent = projectName;
+
+    // 해당하는 프로젝트 리스트에 추가
+    const targetList = document.getElementById(${projectType}-projects);
+    targetList.appendChild(newProject);
+
+    // 새로 추가된 프로젝트에 클릭 이벤트 리스너 추가
+    newProject.addEventListener('click', function() {
+        document.querySelectorAll('.project-item').forEach(p => {
+            p.classList.remove('active');
+        });
+        this.classList.add('active');
+    });
+
+    closeModal();
+});
+
+// 프로젝트 아이템 활성화 처리
+document.querySelectorAll('.project-item').forEach(item => {
+    item.addEventListener('click', function() {
+        // 모든 프로젝트에서 active 클래스 제거
+        document.querySelectorAll('.project-item').forEach(p => {
+            p.classList.remove('active');
+        });
+        // 클릭된 프로젝트에 active 클래스 추가
+        this.classList.add('active');
+    });
+});
+
+// 모달 외부 클릭시 닫기
+modal.addEventListener('click', function(e) {
+    if (e.target === modal) {
+        closeModal();
+    }
+});
+</script>
 </html>

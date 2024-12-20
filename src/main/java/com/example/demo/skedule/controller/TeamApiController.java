@@ -10,7 +10,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/teams")
+@RequestMapping("/teams")
 public class TeamApiController {
     final TeamDAO teamDAO;
 
