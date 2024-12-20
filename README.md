@@ -51,7 +51,8 @@ CREATE TABLE private_todo (
     todo_name VARCHAR(100) NOT NULL,
     st_time TIME NOT NULL,
     ed_time TIME NOT NULL,
-    day VARCHAR(20) NOT NULL,
+    st_day VARCHAR(20) NOT NULL,
+    ed_day VARCHAR(20) NOT NULL,
     color VARCHAR(20),
     user_id INT NOT NULL
 );
