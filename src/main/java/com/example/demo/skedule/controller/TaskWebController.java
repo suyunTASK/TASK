@@ -54,7 +54,8 @@ public class TaskWebController {
 		try {
 			User iuser=userDAO.getUserByName(user.getUsername());
 			if(iuser.getPassword().equals(user.getPassword())) {
-				model.addAttribute("user",user);
+				model.addAttribute("user",iuser);
+				logger.warn("유저정보"+iuser.getUserId()+","+iuser.getUsername());
 				return "redirect:/task/main/"+ iuser.getUserId();
 			}
 			else {

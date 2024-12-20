@@ -14,7 +14,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class UserDAO {
     final String JDBC_DRIVER = "org.mariadb.jdbc.Driver";
-    final String JDBC_URL = "jdbc:mariadb://172.16.2.170/task";
+    final String JDBC_URL = "jdbc:mariadb://172.30.1.16/task";
 
     // DB 연결 메서드
     public Connection open() {
@@ -53,13 +53,14 @@ public class UserDAO {
     public User getUserByName(String name) throws SQLException {
         Connection conn = open();
         User user = new User();
-        String sql = "SELECT name, password FROM user WHERE name = ?";
+        String sql = "SELECT user_id, name, password FROM user WHERE name = ?";
         PreparedStatement pstmt = conn.prepareStatement(sql);
         pstmt.setString(1, name);
         ResultSet rs = pstmt.executeQuery();
 
         try (conn; pstmt; rs) {
             if (rs.next()) {;
+            	user.setUserId(rs.getInt("user_id"));
             	user.setUsername(rs.getString("name"));
                 user.setPassword(rs.getString("password"));
             }

@@ -15,7 +15,7 @@ import org.springframework.stereotype.Repository;
 public class TeamTodoDAO {
     
 	final String JDBC_DRIVER = "org.mariadb.jdbc.Driver";
-    final String JDBC_URL = "jdbc:mariadb://192.168.162.24/task";
+    final String JDBC_URL = "jdbc:mariadb://172.30.1.16/task";
     
     // DB 연결 메서드
     public Connection open() {
