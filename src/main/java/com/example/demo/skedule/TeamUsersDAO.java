@@ -13,14 +13,14 @@ import org.springframework.stereotype.Component;
 @Component
 public class TeamUsersDAO {
 	final String JDBC_DRIVER = "org.mariadb.jdbc.Driver";
-    final String JDBC_URL = "jdbc:mariadb://192.168.163.225/task";
+    final String JDBC_URL = "jdbc:mariadb://localhost:3306/task";
  
     // DB 연결 메서드
     public Connection open() {
         Connection conn = null;
         try {
             Class.forName(JDBC_DRIVER);
-            conn = DriverManager.getConnection(JDBC_URL, "kdk", "1234");
+            conn = DriverManager.getConnection(JDBC_URL, "root", "1234");
         } catch (Exception e) {
             e.printStackTrace();
         }
