@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class TeamUsersDAO {
 	final String JDBC_DRIVER = "org.mariadb.jdbc.Driver";
-    final String JDBC_URL = "jdbc:mariadb://192.168.162.24/task";
+    final String JDBC_URL = "jdbc:mariadb://172.16.2.170/task";
 
     // DB 연결 메서드
     public Connection open() {
@@ -67,6 +67,25 @@ public class TeamUsersDAO {
                 teamUser.setLeader(rs.getBoolean("Leader"));
             }
             return teamUser;
+        }
+    }
+    public List<TeamUsers> getAllTeamIdByUserId(int userId) throws SQLException {
+        Connection conn = open();
+        List<TeamUsers> tul = new ArrayList<>();
+        String sql = "SELECT team_id, role ,Leader FROM team_users WHERE user_id = ?";
+        PreparedStatement pstmt = conn.prepareStatement(sql);
+        pstmt.setInt(1, userId);
+        ResultSet rs = pstmt.executeQuery();
+        
+        try (conn; pstmt; rs) {
+            while (rs.next()) {
+            	TeamUsers tu = new TeamUsers();
+                tu.setTeamId(rs.getInt("team_id"));
+                tu.setRole(rs.getString("role"));
+                tu.setLeader(rs.getBoolean("Leader"));
+                tul.add(tu);
+            }
+            return tul;
         }
     }
 

@@ -10,10 +10,11 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
+
 @Component
 public class TeamDAO {
 	final String JDBC_DRIVER = "org.mariadb.jdbc.Driver";
-    final String JDBC_URL = "jdbc:mariadb://192.168.163.225/task";
+    final String JDBC_URL = "jdbc:mariadb://172.16.2.170/task";
 
     // DB 연결 메서드
     public Connection open() {
@@ -50,21 +51,21 @@ public class TeamDAO {
     public Team getTeam(int teamId) throws SQLException {
         Connection conn = open();
         Team team = new Team();
-        String sql = "SELECT team_id, team_todo_id, team_name FROM team WHERE team_id = ?";
+        String sql = "SELECT team_todo_id, team_name FROM team WHERE team_id = ?";
         PreparedStatement pstmt = conn.prepareStatement(sql);
         pstmt.setInt(1, teamId);
         ResultSet rs = pstmt.executeQuery();
 
         try (conn; pstmt; rs) {
             if (rs.next()) {
-                team.setTeamId(rs.getInt("team_id"));
+                //team.setTeamId(rs.getInt("team_id"));
                 team.setTeamTodoId(rs.getInt("team_todo_id"));
                 team.setTeamName(rs.getString("team_name"));
             }
             return team;
         }
     }
-
+ 
     // 팀 추가 메서드
     public void addTeam(Team team) throws Exception {
         Connection conn = open();
@@ -104,4 +105,26 @@ public class TeamDAO {
             pstmt.executeUpdate();
         }
     }
+
+	public List<Team> getAllTeamsById(int userId) throws SQLException {
+		Connection conn = open();
+		List<Team> teamList = new ArrayList<>();
+		String sql = "SELECT DISTINCT team_id, team_todo_id, team_name FROM team WHERE user_id = ?";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setInt(1, userId);
+		//String sql = "select aid, title, img, STR_TO_DATE(date, '%Y-%m-%d') as cdate from news";
+		//PreparedStatement pstmt = conn.prepareStatement(sql);
+		
+		ResultSet rs = pstmt.executeQuery();
+		try (conn; pstmt; rs) {
+			while (rs.next()) {
+				Team t = new Team();
+				t.setTeamId(rs.getInt("team_id"));
+				//t.setTeamTodoId(rs.getInt("team_todo_id"));
+				t.setTeamName(rs.getString("team_name"));
+				teamList.add(t);
+			}
+			return teamList;
+		}
+	}
 }

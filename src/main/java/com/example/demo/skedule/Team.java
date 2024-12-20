@@ -3,7 +3,7 @@ package com.example.demo.skedule;
 public class Team{
 	int team_id;
 	int team_todo_id;
-	String team_name;
+	String teamName;
 	public int getTeamId() {
 		return team_id;
 	}
@@ -17,10 +17,10 @@ public class Team{
 		this.team_todo_id = team_todo_id;
 	}
 	public String getTeamName() {
-		return team_name;
+		return teamName;
 	}
-	public void setTeamName(String team_name) {
-		this.team_name = team_name;
+	public void setTeamName(String teamName) {
+		this.teamName = teamName;
 	}
 	
 }

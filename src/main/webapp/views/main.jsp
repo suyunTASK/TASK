@@ -290,7 +290,7 @@ body {
 </head>
 <body>
 	<!-- 사이드바 -->
-	<jsp:include page="sidebar.jsp" />
+	<jsp:include page="sidebar.jsp"  />
 	
 	<!-- 프로젝트 추가 모달 -->
 	<div class="modal" id="projectModal">
@@ -319,6 +319,7 @@ body {
 
 	<!-- 메인 콘텐츠 -->
 	<div class="main-content">
+		
 		<!-- 상단 네비게이션 -->
 		<div class="top-nav">
 			<div class="nav-links">
