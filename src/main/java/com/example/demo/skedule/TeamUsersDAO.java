@@ -13,14 +13,14 @@ import org.springframework.stereotype.Component;
 @Component
 public class TeamUsersDAO {
 	final String JDBC_DRIVER = "org.mariadb.jdbc.Driver";
-    final String JDBC_URL = "jdbc:mariadb://172.30.1.16/task";
-
+    final String JDBC_URL = "jdbc:mariadb://localhost:3306/task";
+ 
     // DB 연결 메서드
     public Connection open() {
         Connection conn = null;
         try {
             Class.forName(JDBC_DRIVER);
-            conn = DriverManager.getConnection(JDBC_URL, "kdk", "1234");
+            conn = DriverManager.getConnection(JDBC_URL, "root", "1234");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -67,25 +67,6 @@ public class TeamUsersDAO {
                 teamUser.setLeader(rs.getBoolean("Leader"));
             }
             return teamUser;
-        }
-    }
-    public List<TeamUsers> getAllTeamIdByUserId(int userId) throws SQLException {
-        Connection conn = open();
-        List<TeamUsers> tul = new ArrayList<>();
-        String sql = "SELECT team_id, role ,Leader FROM team_users WHERE user_id = ?";
-        PreparedStatement pstmt = conn.prepareStatement(sql);
-        pstmt.setInt(1, userId);
-        ResultSet rs = pstmt.executeQuery();
-        
-        try (conn; pstmt; rs) {
-            while (rs.next()) {
-            	TeamUsers tu = new TeamUsers();
-                tu.setTeamId(rs.getInt("team_id"));
-                tu.setRole(rs.getString("role"));
-                tu.setLeader(rs.getBoolean("Leader"));
-                tul.add(tu);
-            }
-            return tul;
         }
     }
 

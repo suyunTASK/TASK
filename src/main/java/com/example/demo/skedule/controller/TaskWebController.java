@@ -1,6 +1,5 @@
 package com.example.demo.skedule.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -26,7 +25,6 @@ public class TaskWebController {
 	final PrivateTodoDAO privateTodoDAO;
 	final TeamDAO teamDAO;
 	final TeamUsersDAO teamUserDAO;
-	
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired
@@ -54,9 +52,8 @@ public class TaskWebController {
 		try {
 			User iuser=userDAO.getUserByName(user.getUsername());
 			if(iuser.getPassword().equals(user.getPassword())) {
-				model.addAttribute("user",iuser);
-				logger.warn("유저정보"+iuser.getUserId()+","+iuser.getUsername());
-				return "redirect:/task/main/"+ iuser.getUserId();
+				model.addAttribute("user",user);
+				return "redirect:/task/main";
 			}
 			else {
 				logger.warn("로그인 실패!!");
@@ -89,22 +86,11 @@ public class TaskWebController {
 	}
 
 	// 개인 할 일 목록 페이지
-	@GetMapping("/main/{id}")
-	public String listTodos(@PathVariable int id, Model model) {
+	@GetMapping("/main")
+	public String listTodos(Model model) {
 		try {
 			List<PrivateTodo> todos = privateTodoDAO.getAllPrivateTodos();
-			
 			model.addAttribute("todos", todos);
-			logger.warn("식별번호"+id);
-			List<TeamUsers> tus=teamUserDAO.getAllTeamIdByUserId(id);
-			
-			List<Team> teams = new ArrayList<>();
-			for (int i=0;i<tus.size();i++) {
-				teams.add(teamDAO.getTeam(tus.get(i).getTeamId()));
-			}
-			
-			model.addAttribute("teams", teams);
-			model.addAttribute("user",userDAO.getUserById(id));
 		} catch (Exception e) {
 			logger.error("목록 가져오기 실패", e);
 			model.addAttribute("error", "Failed to load todos");
@@ -150,8 +136,20 @@ public class TaskWebController {
 	
 	// 새 프로젝트 추가 페이지
 	@GetMapping("/addProject")
-	public String addProject(Model model) {
+	public String addProject() {
 		return "/addProject";
+	}
+	
+	@PostMapping("/addProject")
+	public String addProject(@ModelAttribute Team team, Model model) {
+		try {
+			teamDAO.addTeam(team);
+			return "/main";
+		} catch (Exception e) {
+			logger.error("프로젝트 생성 실패", e);
+			model.addAttribute("error", "프로젝트 생성 실패");
+			return "redirect:/task/addProject";
+		}
 	}
 
 	// 팀 목록 출력
@@ -164,6 +162,6 @@ public class TaskWebController {
 			logger.error("Error fetching teams", e);
 			model.addAttribute("error", "Failed to load teams");
 		}
-		return "redirect:/view/main";
+		return "view/sidebar";
 	}
 }

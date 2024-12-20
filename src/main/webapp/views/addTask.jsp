@@ -351,47 +351,11 @@ to {
 </head>
 <body>
 	<!-- 사이드바 -->
-	<div class="sidebar">
-		<div class="logo" onClick="location.href='main.jsp'">TASK</div>
-
-
-		<!-- 팀 리더 정보 -->
-		<div class="team-leader">
-			<img src="/api/placeholder/40/40" alt="Team Leader">
-			<div>
-				<div>김지훈</div>
-				<small>팀장</small>
-			</div>
-		</div>
-
-		<!-- 개인 프로젝트 섹션 -->
-		<div class="project-category">
-			<div class="category-header">개인 프로젝트</div>
-			<div class="project-list" id="personal-projects">
-				<div class="project-item active">개인 프로젝트 1</div>
-				<div class="project-item">개인 프로젝트 2</div>
-			</div>
-		</div>
-
-		<!-- 팀 프로젝트 섹션 -->
-		<div class="project-category">
-			<div class="category-header">팀 프로젝트</div>
-			<div class="project-list" id="team-projects">
-				<div class="project-item">팀 프로젝트 1</div>
-				<div class="project-item">팀 프로젝트 2</div>
-			</div>
-			<!-- 프로젝트 추가 섹션 -->
-			<div class="project-category">
-				<button class="add-project-btn" onclick="openModal('personal')">+
-					프로젝트 추가</button>
-			</div>
-		</div>
-
-	</div>
-
+	<jsp:include page="sidebar.jsp" />
+	
 	<!-- 새 업무 추가 메인 콘텐츠 -->
 	<div class="main-content">
-		<div class="add-task-container">z
+		<div class="add-task-container">
 			<h2 class="form-title">새 업무 추가</h2>
 			<form action="/Task/private?action=addTask" method="post" enctype="multipart/form-data">
 				<div class="form-group">
@@ -449,7 +413,7 @@ to {
 
 				<div class="btn-group">
 					<button type="button" class="btn btn-secondary"
-						onclick="location.href='main.jsp'">취소</button>
+						onclick="location.href='main'">취소</button>
 					<button type="submit" class="btn btn-primary">업무 추가</button>
 				</div>
 			</form>

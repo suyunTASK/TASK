@@ -9,19 +9,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Repository;
 
-@Repository
+@Component
 public class UserDAO {
     final String JDBC_DRIVER = "org.mariadb.jdbc.Driver";
-    final String JDBC_URL = "jdbc:mariadb://172.30.1.16/task";
+    final String JDBC_URL = "jdbc:mariadb://localhost:3306/task";
 
     // DB 연결 메서드
     public Connection open() {
         Connection conn = null;
         try {
             Class.forName(JDBC_DRIVER);
-            conn = DriverManager.getConnection(JDBC_URL, "kdk", "1234");
+            conn = DriverManager.getConnection(JDBC_URL, "root", "1234");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -59,32 +58,16 @@ public class UserDAO {
         ResultSet rs = pstmt.executeQuery();
 
         try (conn; pstmt; rs) {
-            if (rs.next()) {;
-            	user.setUserId(rs.getInt("user_id"));
-            	user.setUsername(rs.getString("name"));
-                user.setPassword(rs.getString("password"));
-            }
-            return user;
-        }
-    }
-    public User getUserById(int id) throws SQLException {
-        Connection conn = open();
-        User user = new User();
-        String sql = "SELECT name, password FROM user WHERE user_id = ?";
-        PreparedStatement pstmt = conn.prepareStatement(sql);
-        pstmt.setInt(1, id);
-        ResultSet rs = pstmt.executeQuery();
-        user.setUserId(id);
-        try (conn; pstmt; rs) {
             if (rs.next()) {
-            	
-            	user.setUsername(rs.getString("name"));
+                user.setUserId(rs.getInt("user_id"));
+                user.setUsername(rs.getString("name"));
                 user.setPassword(rs.getString("password"));
             }
-            return user;
         }
+        return user;
     }
-    // 사용자 추가 메서드
+
+ // 사용자 추가 메서드
     public void addUser(User user) throws SQLException {
         Connection conn = open();
         String sql = "INSERT INTO user (name, password) VALUES (?, ?)";

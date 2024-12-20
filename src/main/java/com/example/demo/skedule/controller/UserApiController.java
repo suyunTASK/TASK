@@ -52,6 +52,7 @@ public class UserApiController {
 			User user = userDAO.getUserByName(username); // 사용자 이름으로 검색
 			if (user != null && user.getPassword().equals(password)) {
 				session.setAttribute("userName", user.getUsername());
+				session.setAttribute("user_id", user.getUserId());
 				return "redirect:/main";
 			} else {
 				return "redirect:/views/login.jsp?error=invalid_credentials";
@@ -60,6 +61,13 @@ public class UserApiController {
 			e.printStackTrace();
 			return "redirect:/views/login.jsp?error=login_failed";
 		}
+	}
+	
+	// 사용자 로그아웃
+	@PostMapping("/logout")
+	public String logout(HttpSession session) {
+	    session.invalidate();  // 세션 무효화
+	    return "redirect:/views/login.jsp";
 	}
 
 	// 사용자 삭제
