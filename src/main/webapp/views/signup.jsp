@@ -116,7 +116,7 @@
         <div class="register-logo">
             <img src="../image/TASK.png" alt="Task Logo">
         </div>
-        <form class="register-form" action="/TASK/user?action=signup" method="post" enctype="multipart/form-data">
+        <form class="register-form" action="/task/signup" method="post" enctype="multipart/form-data">
             <div class="input-group">
                 <label for="username">아이디</label>
                 <input type="text" id="username" name="username" placeholder="아이디를 입력하세요" required>
@@ -132,7 +132,7 @@
             <button class="register-button" type="submit">회원가입</button>
         </form>
         <div class="register-footer">
-            이미 계정이 있으신가요? <a href="/TASK/views/login.jsp">로그인</a>
+            이미 계정이 있으신가요? <a href="login">로그인</a>
         </div>
     </div>
 </body>

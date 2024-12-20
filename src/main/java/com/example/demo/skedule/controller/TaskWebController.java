@@ -77,7 +77,7 @@ public class TaskWebController {
 	public String signup(@ModelAttribute User user, Model model) {
 		try {
 			userDAO.addUser(user);
-			return "login";
+			return "/login";
 		} catch (Exception e) {
 			logger.error("유저 생성 실패", e);
 			model.addAttribute("error", "유저 생성 실패");
@@ -106,7 +106,7 @@ public class TaskWebController {
 		} catch (Exception e) {
 			logger.error("Error adding todo", e);
 			model.addAttribute("error", "Failed to add todo");
-			return "redirect:/view/main";
+			return "redirect:/task/main";
 		}
 	}
 

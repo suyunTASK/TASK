@@ -118,7 +118,7 @@
 <body>
     <div class="login-container">
         <div class="login-logo">
-            <img src="../image/TASK.png" alt="Task Logo">
+            <img src="/images/TASK.png" alt="Task Logo">
         </div>
 		<form class="login-form" action="/task/login" method="post">
             <div class="input-group">
@@ -132,7 +132,7 @@
             <button class="login-button" type="submit">로그인</button>
         </form>
         <div class="login-footer">
-            계정이 없으신가요? <a href="/TASK/views/signup.jsp">회원가입</a>
+            계정이 없으신가요? <a href="signup">회원가입</a>
         </div>
     </div>
 </body>
