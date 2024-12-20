@@ -169,7 +169,7 @@
 <body>
     <div class="login-container">
         <div class="login-logo">
-            <img src="../images/TASK.png" alt="Task Logo">
+            <img src="/images/TASK.png" alt="Task Logo">
         </div>
         
         <c:if test="${not empty param.error}">

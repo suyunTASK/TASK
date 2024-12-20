@@ -161,7 +161,7 @@
 <body>
     <div class="register-container">
         <div class="register-logo">
-            <img src="../image/TASK.png" alt="Task Logo">
+            <img src="/images/TASK.png" alt="Task Logo">
         </div>
         <form class="register-form" action="/task/signup" method="post" enctype="multipart/form-data">
 	        <c:if test="${not empty errorMessage}">

@@ -213,7 +213,7 @@
 		<c:choose>
 			<c:when test="${not empty sessionScope.user}">
 				<div class="team-leader">
-					<img src="../image/user.png" alt="Team Leader">
+					<img src="/images/user.png" alt="Team Leader">
 					<div>
 						<div>${sessionScope.user.username}</div>
 						<small>팀장</small>
