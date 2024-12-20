@@ -25,7 +25,6 @@ public class TaskWebController {
 	final PrivateTodoDAO privateTodoDAO;
 	final TeamDAO teamDAO;
 	final TeamUsersDAO teamUserDAO;
-	
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired
