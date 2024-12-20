@@ -156,14 +156,27 @@
 	border-color: rgba(255, 255, 255, 0.6);
 }
 </style>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+// 로그인한 사용자 ID를 세션에서 가져와서 Ajax 요청에 포함시킴
+$(document).ready(function() {
+    let userId = <%= session.getAttribute("user_id") %>;  // 세션에서 user_id 가져오기
+
+    $.get('/teams?user_id=' + userId, function(data) {
+        let teamProjectsContainer = $('#team-projects');
+        data.forEach(function(team) {
+            let projectItem = "<div class="project-item">${team.teamName}</div>"";
+            teamProjectsContainer.append(projectItem);
+        });
+    });
+});
+</script>
 </head>
 <body>
-	<!-- 사이드바 -->
 	<div class="sidebar">
 		<div class="logo" onClick="location.href='main'">TASK</div>
 
 		<div class="team-leader">
-			<img src="/api/placeholder/40/40" alt="Team Leader">
 			<img src="../image/user.png" alt="Team Leader">
 			<div>
 				<div>${userName}</div>
@@ -181,39 +194,12 @@
 		<div class="project-category">
 			<div class="category-header">팀 프로젝트</div>
 			<div class="project-list" id="team-projects">
-				<!-- 동적으로 팀 목록 추가 -->
+				<!-- 동적으로 팀 목록 추가됨 -->
 			</div>
 			<div class="project-category">
 				<button class="add-project-btn" onclick="location.href='addProject'">+ 프로젝트 추가</button>
 			</div>
 		</div>
 	</div>
-	<script>
-		// 팀 프로젝트 목록을 API에서 가져오는 함수
-		async function fetchTeamProjects() {
-			try {
-				// API 호출 (RESTful API를 통해 팀 목록을 가져옴)
-				const response = await fetch('/api/teams');
-				if (!response.ok) {
-					throw new Error('팀 목록을 가져오는 데 실패했습니다.');
-				}
-				const teams = await response.json();
-
-				// 팀 프로젝트 목록을 동적으로 생성
-				const teamProjectsContainer = document.getElementById('team-projects');
-				teams.forEach(team => {
-					const projectItem = document.createElement('div');
-					projectItem.classList.add('project-item');
-					projectItem.textContent = team.teamName; // 팀 이름을 표시
-					teamProjectsContainer.appendChild(projectItem);
-				});
-			} catch (error) {
-				console.error('Error fetching team projects:', error);
-			}
-		}
-
-		// 페이지 로드 시 팀 프로젝트 목록을 가져옴
-		window.onload = fetchTeamProjects;
-	</script>
 </body>
 </html>

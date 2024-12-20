@@ -70,14 +70,13 @@ public class TeamDAO {
     }
 
     // 팀 추가 메서드
-    public void addTeam(Team team) throws Exception {
+    public void addTeam(Team team) throws SQLException {
         Connection conn = open();
-        String sql = "INSERT INTO team (team_todo_id, team_name) VALUES (?, ?)";
+        String sql = "INSERT INTO team (team_name) VALUES (?)";
         PreparedStatement pstmt = conn.prepareStatement(sql);
 
         try (conn; pstmt) {
-            pstmt.setInt(1, team.getTeamTodoId());
-            pstmt.setString(2, team.getTeamName());
+            pstmt.setString(1, team.getTeamName());
             pstmt.executeUpdate();
         }
     }

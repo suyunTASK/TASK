@@ -137,8 +137,20 @@ public class TaskWebController {
 	
 	// 새 프로젝트 추가 페이지
 	@GetMapping("/addProject")
-	public String addProject(Model model) {
+	public String addProject() {
 		return "/addProject";
+	}
+	
+	@PostMapping("/addProject")
+	public String addProject(@ModelAttribute Team team, Model model) {
+		try {
+			teamDAO.addTeam(team);
+			return "/main";
+		} catch (Exception e) {
+			logger.error("프로젝트 생성 실패", e);
+			model.addAttribute("error", "프로젝트 생성 실패");
+			return "redirect:/task/addProject";
+		}
 	}
 
 	// 팀 목록 출력
