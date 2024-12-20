@@ -177,7 +177,7 @@ $(document).ready(function() {
 		<div class="logo" onClick="location.href='main'">TASK</div>
 
 		<div class="team-leader">
-			<img src="../image/user.png" alt="Team Leader">
+			<img src="/images/user.png" alt="Team Leader">
 			<div>
 				<div>${userName}</div>
 				<small>팀장</small>
