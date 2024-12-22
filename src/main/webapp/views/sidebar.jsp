@@ -210,12 +210,10 @@
 		<div class="logo" onClick="location.href='main'">TASK</div>
 
 		<!-- 로그인 상태에 따라 표시 -->
-		<c:choose>
-			<c:when test="${not empty sessionScope.user}">
 				<div class="team-leader">
 					<img src="/images/user.png" alt="Team Leader">
 					<div>
-						<div>${sessionScope.user.username}</div>
+						<div>${user.username}</div>
 						<small>팀장</small>
 					</div>
 				</div>
@@ -231,11 +229,13 @@
 					<div class="category-header">팀 프로젝트</div>
 					<div class="project-list" id="team-projects">
 						<ul class="list-group">
-							<c:forEach var="team" items="${teams}">
-						<<li class="list-group-item">
-									<div>${team.teamName}</div>
-								</li>
-							</c:forEach>
+							<c:if test="${not empty teams}">
+								<c:forEach var="team" items="${teams}">
+									<li class="list-group-item">
+										<div>${team.teamName}</div>
+									</li>
+								</c:forEach>
+							</c:if>
 						</ul>
 					</div>
 					<div class="project-category">
@@ -250,17 +250,6 @@
 					<button class="auth-button logout-btn" onclick="logout'">
 						로그아웃</button>
 				</div>
-			</c:when>
-			<c:otherwise>
-				<!-- 로그인되지 않은 경우 -->
-				<div class="auth-section">
-					<button class="auth-button login-btn"
-						onclick="location.href='login'">로그인</button>
-					<button class="auth-button signup-btn"
-						onclick="location.href='signup'">회원가입</button>
-				</div>
-			</c:otherwise>
-		</c:choose>
 	</div>
 </body>
 </html>
