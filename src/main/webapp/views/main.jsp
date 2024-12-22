@@ -322,18 +322,15 @@ body {
 		
 		<!-- 상단 네비게이션 -->
 		<div class="top-nav">
-			<div class="nav-links">
-				<div class="nav-link active" onClick="location.href='main'">할
-					일</div>
-				<div class="nav-link" onClick="location.href='weekend'">주간
-					일정표</div>
-				<div class="nav-link" onClick="location.href='calendar'">캘린더</div>
-				<div class="nav-link" onClick="location.href='blockByTask'">업무
-					별 블록</div>
-			</div>
-			<button class="add-task-btn" onClick="location.href='addTask'">+
-				새 업무</button>
-		</div>
+    <div class="nav-links">
+        <div class="nav-link active" onClick="location.href='/task/main/${user.userId}'">할 일</div>
+        <div class="nav-link" onClick="location.href='/task/weekend'">주간 일정표</div>
+        <div class="nav-link" onClick="location.href='/task/calendar'">캘린더</div>
+        <div class="nav-link" onClick="location.href='/task/blockByTask'">업무 별 블록</div>
+    </div>
+    <button class="add-task-btn" onClick="location.href='/task/addTask'">+ 새 업무</button>
+</div>
+
 
 		<!-- 칸반 보드 -->
 		<div class="board-container">

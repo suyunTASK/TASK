@@ -69,14 +69,14 @@ public class UserDAO {
     public User getUserById(int id) throws SQLException {
         Connection conn = open();
         User user = new User();
-        String sql = "SELECT name, password FROM user WHERE user_id = ?";
+        String sql = "SELECT user_id,name, password FROM user WHERE user_id = ?";
         PreparedStatement pstmt = conn.prepareStatement(sql);
         pstmt.setInt(1, id);
         ResultSet rs = pstmt.executeQuery();
         user.setUserId(id);
         try (conn; pstmt; rs) {
             if (rs.next()) {
-            	
+            	user.setUserId(rs.getInt("user_id"));
             	user.setUsername(rs.getString("name"));
                 user.setPassword(rs.getString("password"));
             }

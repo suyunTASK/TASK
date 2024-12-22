@@ -240,7 +240,7 @@
 					</div>
 					<div class="project-category">
 						<button class="add-project-btn"
-							onclick="location.href='addProject'">+ 프로젝트 추가</button>
+							onclick="location.href='/task/addProject'">+ 프로젝트 추가</button>
 					</div>
 				</div>
 

@@ -413,7 +413,7 @@ to {
 
 				<div class="btn-group">
 					<button type="button" class="btn btn-secondary"
-						onclick="location.href='main'">취소</button>
+						onclick="location.href='/task/main/1'">취소</button>
 					<button type="submit" class="btn btn-primary">업무 추가</button>
 				</div>
 			</form>
